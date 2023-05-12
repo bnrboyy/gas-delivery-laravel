@@ -1,0 +1,25 @@
+#index .index-item .index-item-language {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    color: #fff;
+    gap: 1rem;
+}
+
+#index .index-item .index-item-language img {
+    border-radius: 10rem;
+}
+
+#index .index-item .index-item-language p {
+    min-width: 4rem;
+}
+
+#index .index-item .lang-dropdown {
+    display: none;
+}
+
+#index .index-item .lang-dropdown.show {
+    display: block;
+}

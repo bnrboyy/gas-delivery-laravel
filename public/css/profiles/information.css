@@ -1,0 +1,27 @@
+.info-item-input-group {
+    display: flex;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.info-item-input-group input {
+    background: none;
+    border: none;
+    box-shadow: inset -3px -3px 7px #fff, inset 2px 2px 5px #b4c1d5;
+}
+
+.info-item-information-group-content-icon {
+    min-width: 25px;
+}
+
+.info-item-information-group-content input.error {
+    border: 2px solid red;
+}
+
+.info-item-information-group-content input.valid {
+    border: 2px solid green;
+}
+
+.info-item-password-group input.error {
+    border: 2px solid red;
+}
