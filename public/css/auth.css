@@ -16,10 +16,16 @@
     min-width: 4rem;
 }
 
-#index .index-item .lang-dropdown {
+#index .lang-dropdown {
     display: none;
 }
 
-#index .index-item .lang-dropdown.show {
+#index .lang-dropdown.show {
+    display: block;
+    position: absolute;
+    top: 45px;
+}
+
+#index .menu-language.show {
     display: block;
 }
