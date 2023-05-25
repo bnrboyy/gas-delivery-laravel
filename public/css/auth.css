@@ -1,31 +1,104 @@
-#index .index-item .index-item-language {
+main {
+    width: 100%;
+    height: 100vh;
+    padding: 2rem 49px;
+    background-color: rgb(199, 199, 199);
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+main .container {
+    width: 100%;
+    height: 100vh;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: -5px -5px 20px #b7b4b4, 5px 5px 10px #8b8888;
+}
+
+.container .service-box {
+    display: flex;
+    gap: 3rem;
+    padding: 0 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 60%;
+}
+
+.container .service-box .btn-left,
+.container .service-box .btn-right {
+    width: 25%;
+    height: 30%;
+    color: #000;
+    border-radius: 18px;
+    /* background-color: rgb(25, 36, 58); */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    font-size: 14px;
-    color: #fff;
-    gap: 1rem;
+    box-shadow: -5px -5px 20px #b7b4b4, 5px 5px 10px #8b8888;
+    cursor: pointer;
 }
 
-#index .index-item .index-item-language img {
-    border-radius: 10rem;
+.container .service-box .btn-left.active {
+    box-shadow: inset -3px -3px 7px #b7b4b4, inset 3px 3px 8px #8b8888 !important;
+    color: #848484 !important;
+}
+.container .service-box .btn-right.active {
+    box-shadow: inset -3px -3px 7px #b7b4b4, inset 3px 3px 8px #8b8888 !important;
+    color: #848484 !important;
 }
 
-#index .index-item .index-item-language p {
-    min-width: 4rem;
+.container .service-box .btn-service h1 {
+    font-size: 20px;
+    letter-spacing: 1px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
-#index .lang-dropdown {
-    display: none;
+@media screen and (max-width: 930px) {
+    .container .service-box {
+        flex-direction: column !important;
+    }
+
+    .container .service-box .btn-service {
+        width: 55%;
+        height: 30%;
+    }
 }
 
-#index .lang-dropdown.show {
-    display: block;
-    position: absolute;
-    top: 45px;
-}
+@media screen and (max-width: 585px) {
+    main {
+        padding: 2rem 25px;
+    }
 
-#index .menu-language.show {
-    display: block;
+    .container .service-box {
+        flex-direction: column !important;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    .container .service-box .btn-service {
+        width: 80%;
+        height: 30%;
+    }
+
+    .container .service-box .btn-service img {
+        width: 50px;
+
+    }
+
+    .container .service-box .btn-service h1 {
+        font-size: 16px;
+    }
 }

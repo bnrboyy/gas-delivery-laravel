@@ -1,4 +1,13 @@
-#index .index-item .index-item-language {
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+* {
+    font-family: "Kanit", sans-serif;
+}
+
+body {
+    min-width: 375px;
+}
+
+.index-item .index-item-language {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,24 +17,24 @@
     gap: 1rem;
 }
 
-#index .index-item .index-item-language img {
+.index-item .index-item-language img {
     border-radius: 10rem;
 }
 
-#index .index-item .index-item-language p {
+.index-item .index-item-language p {
     min-width: 4rem;
 }
 
-#index .lang-dropdown {
+.lang-dropdown {
     display: none;
 }
 
-#index .lang-dropdown.show {
+.lang-dropdown.show {
     display: block;
     position: absolute;
     top: 45px;
 }
 
-#index .menu-language.show {
+.menu-language.show {
     display: block;
 }
