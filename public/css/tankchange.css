@@ -1,5 +1,6 @@
 main {
     gap: 0 !important;
+
 }
 
 .container {
@@ -16,6 +17,7 @@ main {
 .header {
     width: 100%;
     height: 100px;
+    padding: 1rem;
 }
 
 .header .title img {
@@ -24,7 +26,7 @@ main {
 }
 
 .header h1 {
-    font-size: 32px;
+    font-size: 28px;
 }
 
 .container .content-products {
@@ -47,6 +49,10 @@ main {
     box-shadow: 5px 5px 10px #b4c1d5;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.container .content-products .card-item.active {
+    box-shadow: inset 0px -2px 7px #b4c1d5, inset 2px 3px 7px #b4c1d5 !important;
 }
 
 .container .content-products .card-item .content-head {

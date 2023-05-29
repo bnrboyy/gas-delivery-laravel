@@ -6,15 +6,14 @@
 
 
 @section('sections')
-    <div class="header flex items-center gap-4">
-        <div class="title flex items-center gap-2">
-            <img src="/images/gas/product-list-icon.png" alt="" width="100">
-            <h1>รายการทั้งหมด:</h1>
-
-        </div>
-    </div>
     <div class="container">
-        <div class="content flex w-full h-full justify-center">
+        <div class="header flex items-center gap-4">
+            <div class="title flex items-center gap-2">
+                <img src="/images/gas/product-list-icon.png" alt="" width="100">
+                <h1>รายการทั้งหมด:</h1>
+            </div>
+        </div>
+        <div class="content flex w-full h-full justify-center overflow-y-auto">
             <div class="content-products w-full h-full">
                 <div class="card-item">
                     <div class="content-head">
@@ -132,5 +131,17 @@
 @endsection
 
 @section('scripts')
-    <script></script>
+    <script>
+        const card_items = document.querySelectorAll(".card-item")
+        card_items.forEach((item) => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active')
+                setTimeout(() => {
+                    item.classList.toggle('active')
+
+                }, 200);
+            })
+        })
+    </script>
+
 @endsection
