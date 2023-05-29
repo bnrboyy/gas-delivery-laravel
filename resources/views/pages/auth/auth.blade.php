@@ -29,15 +29,17 @@
             btn_left.classList.toggle("active")
             setTimeout(() => {
                 btn_left.classList.toggle("active")
+                window.location.href = "/tankchange"
 
-            }, 300)
+            }, 200)
         })
         btn_right.addEventListener("click", () => {
             btn_right.classList.toggle("active")
             setTimeout(() => {
                 btn_right.classList.toggle("active")
+                window.location.href = "/ordering"
 
-            }, 300)
+            }, 200)
         })
         // const langBtn = document.querySelector('.lang-button')
         // const langMenuBtn = document.querySelector('.menu-language-button')

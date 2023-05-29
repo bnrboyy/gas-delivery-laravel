@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\LanguageAvailable;
 use App\Models\Order;
 use App\Models\OrderTemp;
 use App\Models\ProductCategory;
@@ -19,23 +20,30 @@ use App\Models\ProductMoreDetail;
 class VendingAndCafeController extends Controller
 {
     /* Vending and Cafe */
-    public function foodsOrdering(Request $req)
+    public function tankchangeOrdering(Request $req)
     {
+
+        $lang_default = LanguageAvailable::where(['defaults' => 1])->first();
+        $lang = $req->session()->get('language') ? $req->session()->get('language') : $lang_default->abbv_name;
         $branch = BranchInfo::get();
         $title = Category::whereIn('id', range('15', '16'))->get();
         $category = $this->queryCategory(14);
         $banner = $this->queryBanner(14);
+        $language_available = LanguageAvailable::orderBy('defaults', 'desc')->get();
+        $lang_active = LanguageAvailable::where(['abbv_name' => $lang])->first();
 
         $order = OrderTemp::where(['orders_number' => $req->session()->get('orders_number'), 'type_order' => 'foods'])->first();
         if ($order) {
-            return redirect('/foods/cart');
+            // return redirect('/foods/cart');
         }
-        return view('pages.food.ordering', [
+        return view('pages.gas.tankchange', [
             'branch' => $branch,
             'title' => $title,
             'banner' => $banner,
             'category' => $category,
             'content_language' => $this->getContentLanguage($req->session()->get('language')),
+            'language_available' => $language_available,
+            'language_active' => $lang_active
         ]);
     }
 
