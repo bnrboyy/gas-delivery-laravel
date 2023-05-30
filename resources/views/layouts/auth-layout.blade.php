@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/layout.css" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     @yield('style')
-    <title>Manami</title>
+    <title>Gas Delivery</title>
     @yield('style')
 </head>
 
@@ -19,18 +19,21 @@
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="/" class="flex items-center">
                     <img src="/images/logo/gas-logo.png" class="h-10 mr-0" alt="gas-logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">GAS DELIVERY</span>
-                </a>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">GAS DELIVERY</span></a>
                 <div class="flex items-center md:order-2">
-                    <button type="button" data-dropdown-toggle="language-dropdown-menu"
-                        class="lang-button inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                        <img class="rounded-full mr-1 w-7" src="{{ $language_active->flag }}" alt="">
-                        {{ $language_active->name }}
-                    </button>
+                    <div class="btn-cart">
+                        <button type="button" data-dropdown-toggle="language-dropdown-menu"
+                            class="lang-button inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <p style="font-size: 18px">ตะกร้า</p>
+                            <img class="rounded-full mr-1 w-7" src="/images/icons/cart.png" alt="">
+                        </button>
+                        <div class="cart-notify">{{$cart_notify}}</div>
+                    </div>
+
                     <!-- Dropdown -->
                     <div class="lang-dropdown z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
                         role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                        <ul class="py-2 font-medium" role="none">
+                        {{-- <ul class="py-2 font-medium" role="none">
                             @foreach ($language_available as $lang)
                                 <li>
                                     <a href="#"
@@ -43,7 +46,7 @@
                                     </a>
                                 </li>
                             @endforeach
-                        </ul>
+                        </ul> --}}
                     </div>
                     <button data-collapse-toggle="mobile-menu-language-select" type="button"
                         class="menu-language-button inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

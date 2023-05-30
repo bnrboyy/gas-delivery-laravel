@@ -33,7 +33,8 @@ class ContentController extends Controller
             return view('pages.auth.auth', [
                 'content_language' => $this->getContentLanguage($request->session()->get('language')),
                 'language_available' => $language_available,
-                'language_active' => $lang_active
+                'language_active' => $lang_active,
+                'cart_notify' => 4,
             ]);
         }
 

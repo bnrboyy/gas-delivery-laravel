@@ -39,11 +39,31 @@ body {
     display: block;
 }
 
+.btn-cart {
+    position: relative;
+}
+
+.cart-notify {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    bottom: 20px;
+    right: 8px;
+    border-radius: 50%;
+    background-color: red;
+    color: #fff;
+
+}
+
 main {
     width: 100%;
     /* height: auto !important; */
     padding: 2rem 49px;
-    background-color: rgb(199, 199, 199);
+    /* background-color: rgb(199, 199, 199); */
+    background-color: #e5e7eb !important;
     display: flex;
     flex-direction: column;
     align-items: center;

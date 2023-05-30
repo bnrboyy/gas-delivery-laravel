@@ -66,6 +66,8 @@ main {
     width: 100%;
 }
 
+
+
 @media (max-width: 1038px) {
     .container .content-products {
         grid-template-columns: repeat(3, 1fr);

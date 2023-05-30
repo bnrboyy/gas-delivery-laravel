@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\frontoffice;
+
+use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/tankchange', [VendingAndCafeController::class, 'tankchangeOrdering']);
-
+Route::get('/product-details/{product_id}', [VendingAndCafeController::class, 'productDetails']);
 // Login system
 Route::get('/', [ContentController::class, 'getPage']);
 Route::get('/changeLanguage', [ContentController::class, 'changeLanguage']);

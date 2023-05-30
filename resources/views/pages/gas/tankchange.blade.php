@@ -138,7 +138,7 @@
                 item.classList.toggle('active')
                 setTimeout(() => {
                     item.classList.toggle('active')
-
+                    window.location.href = `/product-details/${1}`
                 }, 200);
             })
         })

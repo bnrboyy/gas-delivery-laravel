@@ -43,9 +43,20 @@ class VendingAndCafeController extends Controller
             'category' => $category,
             'content_language' => $this->getContentLanguage($req->session()->get('language')),
             'language_available' => $language_available,
-            'language_active' => $lang_active
+            'language_active' => $lang_active,
+            'cart_notify' => 4,
         ]);
     }
+
+
+    public function productDetails(Request $request) {
+
+        return view('pages.gas.product-details', [
+            'cart_notify' => 4,
+
+        ]);
+    }
+
 
     public function foodsMenu(Request $request)
     {
