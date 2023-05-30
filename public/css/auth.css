@@ -16,7 +16,6 @@ main .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: -5px -5px 20px #b7b4b4, 5px 5px 10px #8b8888;
 }
 
 .container .service-box {
@@ -41,16 +40,16 @@ main .container {
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    box-shadow: -5px -5px 20px #b7b4b4, 5px 5px 10px #8b8888;
+    box-shadow: -5px -5px 20px #dcd3d3, 5px 5px 10px #a09e9e;
     cursor: pointer;
 }
 
 .container .service-box .btn-left.active {
-    box-shadow: inset -3px -3px 7px #b7b4b4, inset 3px 3px 8px #8b8888 !important;
+    box-shadow: inset -3px -3px 7px #dcd3d3, inset 3px 3px 8px #a09e9e !important;
     color: #848484 !important;
 }
 .container .service-box .btn-right.active {
-    box-shadow: inset -3px -3px 7px #b7b4b4, inset 3px 3px 8px #8b8888 !important;
+    box-shadow: inset -3px -3px 7px #dcd3d3, inset 3px 3px 8px #a09e9e !important;
     color: #848484 !important;
 }
 
