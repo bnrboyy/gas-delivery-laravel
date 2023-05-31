@@ -15,23 +15,23 @@
 
 <body>
     <div class="nav-layout">
-        <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <nav class="bg-gray-900 border-gray-200 dark:bg-gray-900">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="/" class="flex items-center">
                     <img src="/images/logo/gas-logo.png" class="h-10 mr-0" alt="gas-logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">GAS DELIVERY</span></a>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap text-white">GAS DELIVERY</span></a>
                 <div class="flex items-center md:order-2">
                     <div class="btn-cart">
-                        <button type="button" data-dropdown-toggle="language-dropdown-menu"
-                            class="lang-button inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <button type="button" data-dropdown-toggle="language-dropdown-menu" onclick="goToCart()"
+                            class="lang-button inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-white dark:text-white rounded-lg cursor-pointer hover:bg-gray-700 dark:hover:bg-gray-700 dark:hover:text-white">
                             <p style="font-size: 18px">ตะกร้า</p>
-                            <img class="rounded-full mr-1 w-7" src="/images/icons/cart.png" alt="">
+                            <img class="rounded-full mr-1 w-7" src="/images/icons/add-to-cart.png" alt="">
                         </button>
                         <div class="cart-notify">{{$cart_notify}}</div>
                     </div>
 
                     <!-- Dropdown -->
-                    <div class="lang-dropdown z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                    <div class="lang-dropdown z-50 hidden my-4 text-base list-none bg-gray-700 divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
                         role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                         {{-- <ul class="py-2 font-medium" role="none">
                             @foreach ($language_available as $lang)
@@ -49,7 +49,7 @@
                         </ul> --}}
                     </div>
                     <button data-collapse-toggle="mobile-menu-language-select" type="button"
-                        class="menu-language-button inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        class="menu-language-button inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                         aria-controls="mobile-menu-language-select" aria-expanded="true">
                         <span class="sr-only">Open main menu</span>
                         <svg class="w-6 h-6" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20"
@@ -63,27 +63,27 @@
                 <div class="menu-language items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
                     id="mobile-menu-language-select">
                     <ul
-                        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-700 rounded-lg bg-gray-800 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-gray-900 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
                             <a href="/"
-                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 aria-current="page">หน้าหลัก</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">เกี่ยวกับเรา</a>
+                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">เกี่ยวกับเรา</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">บริการ</a>
+                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">บริการ</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">ราคาค่าบริการ</a>
+                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">ราคาค่าบริการ</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">ติดต่อเรา</a>
+                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">ติดต่อเรา</a>
                         </li>
                     </ul>
                 </div>
@@ -122,6 +122,12 @@
         function changeLanguage(lang) {
             location.href = `/changeLanguage?lang=${lang}`
         }
+
+        function goToCart() {
+            if (window.location.pathname === "/cart") return false;
+            window.location.href = "/cart";
+        }
+
     </script>
     @yield('scripts')
 </body>

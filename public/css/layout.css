@@ -60,7 +60,7 @@ body {
 
 main {
     width: 100%;
-    /* height: auto !important; */
+    height: 90vh !important;
     padding: 2rem 49px;
     /* background-color: rgb(199, 199, 199); */
     background-color: #e5e7eb !important;
@@ -72,7 +72,7 @@ main {
 
 main .container {
     width: 100%;
-    /* height: auto; */
+    height: 100% !important;
     border-radius: 20px;
     display: flex;
     align-items: center;
