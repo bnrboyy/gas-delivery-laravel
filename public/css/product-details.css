@@ -126,9 +126,9 @@ main .container .product-details .details .details-item .box-details-action .btn
     width: 145px;
     height: 55px;
     border-radius: 5px;
-    background-color: #004cab;
-    box-shadow: -1px 1px 5px #5ba3fa;
-    color: #fff;
+    background-color: #e28f21;
+    box-shadow: 1px 1px 10px #e28f21;
+    color: rgb(17 24 39); /* main color */
     font-size: 24px;
 }
 
@@ -161,18 +161,18 @@ main .container .product-details .details .details-item .box-details-action .btn
     }
 
     main .container .product-details .details .details-item .box-details-action {
-        min-height: 75px;
+        min-height: 60px;
     }
 }
 
 @media screen and (max-width: 730px) {
     main .container .product-details .details .details-item .box-details-action p {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     main .container .product-details .details .details-item .box-details-action .btn-addToCart {
-        font-size: 18px;
-        height: 45px;
+        font-size: 16px;
+        height: 33px;
     }
 }
 

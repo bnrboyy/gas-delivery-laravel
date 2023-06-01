@@ -63,6 +63,18 @@ class VendingAndCafeController extends Controller
         ]);
     }
 
+    public function orderSummary(Request $request) {
+        return view('pages.gas.order-summary', [
+            'cart_notify' => 4,
+        ]);
+    }
+
+
+
+
+
+
+
 
     public function foodsMenu(Request $request)
     {

@@ -7,7 +7,7 @@
 @section('sections')
     <div class="container">
         <div class="product-details flex items-center justify-center p-4">
-            <div class="details flex w-full items-center p-4 gap-4">
+            <div class="details flex w-full items-center p-2 gap-2">
                 <div class="card-item">
                     <div class="content-head">
                         <img src="/images/gas/gas-cylinder.png" alt="">
@@ -32,12 +32,13 @@
                         </button>
                     </div>
                 </div>
-                <div class="details-item flex flex-col gap-4">
+                <div class="details-item flex flex-col gap-2">
                     <div class="box-details w-full">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, mollitia!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, mollitia!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, mollitia!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, mollitia!</p>
+                        <p>Lorem ipsum dolor sit amet </p>
+                        <p>Lorem ipsum dolor sit amet </p>
+                    </div>
+                    <div class="flex w-full h-[80px]">
+                        <input class="w-full" type="text" placeholder="รายละเอียดเพิ่มเติม">
                     </div>
                     <div class="box-details-action w-full">
                         <p>ราคารวม: <span style="color: #0170fa;">269 บาท</span> </p>
