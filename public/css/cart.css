@@ -84,7 +84,6 @@ main .container .cart-content .cart-item .item-details .details .box-details .de
     height: 30%;
     display: flex;
     gap: 1.5rem;
-    justify-content: center;
     align-items: center;
     /* box-shadow: -5px -5px 20px #fff, 5px 5px 10px #b4c1d5; */
     color: #0170fa;

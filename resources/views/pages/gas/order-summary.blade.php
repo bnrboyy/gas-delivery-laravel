@@ -29,11 +29,11 @@
                     </div>
                     <div class="flex flex-col h-[90%] w-full items-center justify-center overflow-auto">
                         <div class="flex items-center justify-center w-full h-full">
-                            <div class="flex flex-col w-[70%] sm:w-1/2 h-full gap-[5px]">
+                            <div class="flex flex-col w-[70%] sm:w-[80%] h-full gap-[5px]">
                                 <div class="flex w-full justify-between">
                                     <label for="address">*ที่อยู่:</label>
-                                    <figure class="flex w-[30px] h-[30px] justify-center items-center bg-white rounded-full border border-red-500" style="box-shadow: -5px -5px 20px #fff, 5px 5px 10px #b4c1d5;">
-                                        <a href="#">
+                                    <figure class="map flex w-[30px] h-[30px] justify-center items-center bg-white rounded-full border border-red-500" style="box-shadow: -5px -5px 20px #fff, 5px 5px 10px #b4c1d5;">
+                                        <a href="/map?type=drop&page=foods">
                                             <img src="/images/icons/pin-location2.png" alt="" style="max-width: 20px">
                                         </a>
                                     </figure>
@@ -64,11 +64,34 @@
                                         <div class="w-full h-[30px]">
                                             <p>*อัพโหลดสลิป</p>
                                         </div>
-                                        <div class="flex w-full py-2 h-[120px] justify-center items-center">
-                                            <div class="flex justify-center items-center w-[102px] h-full border-dashed border-2 bg-gray-100 border-orange-500 rounded-lg cursor-pointer">
+                                        <div class="flex flex-col w-full py-2 h-[220px] justify-center items-center gap-2">
+
+                                            <div class="flex justify-center items-center w-[102px] h-1/2 border-dashed border-2 bg-gray-100 border-orange-500 rounded-lg cursor-pointer">
                                                 <figure class="w-[50px] h-[50px]">
                                                     <img src="/images/icons/upload.png" alt="">
                                                 </figure>
+                                            </div>
+                                            <div class="flex w-full gap-2 justify-center items-center h-1/2">
+                                                <div class="flex w-[20%] h-full justify-center items-center">
+                                                    <figure class="w-[60px] h-[35px]">
+                                                        <img src="/images/icons/bankicon1.png" alt="">
+                                                    </figure>
+                                                </div>
+                                                <div class="flex flex-col justify-center items-center h-full w-[70%] ">
+                                                    <div class="sm:text-[16px] text-[12px]">
+                                                        <p>ธนาคารไทยพาณิชย์</p>
+                                                        <p>123-456-7890</p>
+                                                        <p>Mr.Manami vendingcafe</p>
+                                                        <input id="bank-id" type="text" name="" value="123-456-7891111" style="display: none;">
+                                                    </div>
+                                                </div>
+                                                <div class="flex w-[10%] h-full justify-center items-center">
+                                                    <button onclick="copyBankId()" class="flex items-center justify-center w-[25px] h-[25px] rounded-full" style="box-shadow: -5px -5px 20px #fff, 5px 5px 10px #b4c1d5;">
+                                                        <figure class="max-w-[18px]">
+                                                            <img src="/images/icons/copy.png" alt="">
+                                                        </figure>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -93,10 +116,10 @@
                                     </figure>
                                     <div class="flex flex-col w-[80%] h-full">
                                         <p class="w-full text-gray-500">เปลี่ยนถัง</p>
-                                        <p class="w-full text-gray-900 text-[18px]">ถัง 18 KG. สีแดง ขนาด...</p>
+                                        <p class="w-full text-gray-900 text-[16px]">ถัง 18 KG. สีแดง ขนาด...</p>
                                         <div class="flex justify-between">
-                                            <p class="w-full text-gray-900 text-[20px]">ราคา: <span class="text-[22px] text-blue-400">150 บาท</span></p>
-                                            <p class="text-[22px] text-blue-400">X1</p>
+                                            <p class="w-full text-gray-900 text-[18px]">ราคา: <span class="text-[20px] text-blue-400">150 บาท</span></p>
+                                            <p class="text-[20px] text-blue-400">X1</p>
                                         </div>
                                     </div>
                                 </div>
@@ -108,22 +131,22 @@
                                     </figure>
                                     <div class="flex flex-col w-[80%] h-full">
                                         <p class="w-full text-gray-500">สั่งสินค้า</p>
-                                        <p class="w-full text-gray-900 text-[20px]">ถัง 18 KG. สีแดง ขนาด...</p>
+                                        <p class="w-full text-gray-900 text-[16px]">ถัง 18 KG. สีแดง ขนาด...</p>
                                         <div class="flex justify-between">
-                                            <p class="w-full text-gray-900 text-[22px]">ราคา: <span class="text-[24px] text-blue-400">150 บาท</span></p>
-                                            <p class="text-[24px] text-blue-400">X1</p>
+                                            <p class="w-full text-gray-900 text-[18px]">ราคา: <span class="text-[20px] text-blue-400">150 บาท</span></p>
+                                            <p class="text-[20px] text-blue-400">X1</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="flex flex-col w-full h-[65px] sm:h-[80px] p-2">
-                            <div class="flex justify-between w-full text-[18px]">
+                            <div class="flex justify-between w-full text-[14px] sm:text-[18px]">
                                 <p>ราคาสินค้า</p>
-                                <p>200 บาท</p>
+                                <p>300 บาท</p>
                             </div>
-                            <div class="flex justify-between w-full text-[18px]">
-                                <p>ค่าส่ง</p>
+                            <div class="flex justify-between w-full text-[14px] sm:text-[18px]">
+                                <p>ค่าจัดส่ง</p>
                                 <p>20 บาท</p>
                             </div>
                         </div>
@@ -132,9 +155,9 @@
             </div>
             <div class="btn-action flex flex-col w-full justify-center items-center h-[10%] border-t-[1px] border-t-gray-400 text-[18px]">
                 <div class="flex w-full h-1/2 items-center justify-center gap-8">
-                    <div class="w-[332px] h-full flex items-center justify-between px-2">
+                    <div class="w-[332px] h-full flex items-center justify-between px-2 font-bold">
                         <p>ราคารวม</p>
-                        <p>220 บาท</p>
+                        <p>320 บาท</p>
                     </div>
                 </div>
                 <div class="flex w-full h-1/2 justify-center items-center gap-8 mb-2 px-2">
@@ -150,10 +173,8 @@
     <script>
         const radio_cash = document.getElementById("radio-cash")
         const radio_tranfer = document.getElementById("radio-tranfer")
-
         const upload_slip = document.querySelector(".upload-slip")
-
-
+        const bank_id = document.getElementById("bank-id")
 
         function paymentType() {
             if (radio_tranfer.checked) {
@@ -161,6 +182,12 @@
             } else {
                 upload_slip.classList.remove('active')
             }
+        }
+
+        function copyBankId() {
+            bank_id.select();
+            bank_id.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(bank_id.value);
         }
     </script>
 @endsection

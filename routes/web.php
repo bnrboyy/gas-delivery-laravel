@@ -20,6 +20,7 @@ Route::get('/tankchange', [VendingAndCafeController::class, 'tankchangeOrdering'
 Route::get('/product-details/{product_id}', [VendingAndCafeController::class, 'productDetails']);
 Route::get('/cart', [VendingAndCafeController::class, 'cartDetails']);
 Route::get('/ordersummary', [VendingAndCafeController::class, 'orderSummary']);
+Route::get('/searchorder', [VendingAndCafeController::class, 'searchOrder']);
 
 
 // Login system

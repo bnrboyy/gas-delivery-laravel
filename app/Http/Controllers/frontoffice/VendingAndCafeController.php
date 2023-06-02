@@ -69,6 +69,13 @@ class VendingAndCafeController extends Controller
         ]);
     }
 
+    public function searchOrder(Request $reqeust) {
+
+        return view('pages.gas.search-order', [
+            'cart_notify' => 4,
+        ]);
+    }
+
 
 
 

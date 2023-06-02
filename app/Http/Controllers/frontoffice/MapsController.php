@@ -9,10 +9,11 @@ use Illuminate\Http\Request;
 class MapsController extends Controller
 {
     public function getMap(Request $request){
-        $infos = $this->getWebInfo('', $request->session()->get('language'));
-        $webInfo = $this->infoSetting($infos);
+        // $infos = $this->getWebInfo('', $request->session()->get('language'));
+        // $webInfo = $this->infoSetting($infos);
         return view('pages.map-system.map', [
-            'maximum_radius' => $webInfo->settings->maximum_radius->value
+            'maximum_radius' => 3,
+            'cart_notify' => 4,
         ]);
     }
 

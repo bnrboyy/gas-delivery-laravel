@@ -4,13 +4,13 @@
     <section id="map">
         <div class="map">
             <div class="map-item">
-                <div id="map-google" style="height: 90vh;"></div>
-                <div class="map-item-button">
+                <div id="map-google" style="height: 100vh;"></div>
+                {{-- <div class="map-item-button">
                     <figure>
                         <img src="/img/map/searchicon.png" alt="searchIcon">
                     </figure>
                     <input type="text" id="input_search" placeholder="Search">
-                </div>
+                </div> --}}
                 <div class="map-item-group"
                     style="position: fixed; width:100%; display:flex; justify-content:space-between; align-items:center; max-width:90vw; top:5rem;left:50%;transform:translate(-50%, -50%);">
                     <div class="map-item-close"
@@ -38,8 +38,7 @@
                     </div>
                     <div class="map-item-detail-confirm" style="width: 100%">
                         <button type="button" id="btn_confirm" onclick="handlerConfirm()"
-                            style="display:flex; justify-content:center; align-items:center; margin: 0 auto; background: #0170fa;width: 100%;max-width: 241px;height: 36px;max-height: 36px;color: #fff;border-radius: 18px;">Choose
-                            this location</button>
+                            style="display:flex; justify-content:center; align-items:center; margin: 0 auto; background: #0170fa;width: 100%;max-width: 241px;height: 36px;max-height: 36px;color: #fff;border-radius: 18px;">เลือกที่อยู่</button>
                     </div>
                 </div>
             </div>
