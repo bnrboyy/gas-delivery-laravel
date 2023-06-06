@@ -55,7 +55,8 @@
                                 </div>
 
                                 <div class="box-details-action flex flex-col items-center w-[15%]">
-                                    <button>
+                                    <button
+                                        onclick="onDelete('{{ $order_temp->orders_number }}', '{{ $item->product_id }}', '{{ $item->quantity }}')">
                                         <img src="/images/icons/delete2.png" alt="" style="max-width: 30px">
                                     </button>
                                 </div>
@@ -64,49 +65,6 @@
 
                         </div>
                     @endforeach
-
-
-
-                    {{-- <div class="item-details w-full flex p-2 gap-2">
-                        <figure class="h-full flex justify-center items-center">
-                            <img src="/images/gas/gas-cylinder.png" alt="">
-                        </figure>
-
-                        <div class="details h-full flex">
-                            <div class="box-details flex flex-col justify-between w-[85%]">
-                                <p class="text-gray-500">เปลี่ยนถัง</p>
-                                <div class="flex justify-between">
-                                    <p>Lorem ipsum dolor.</p>
-                                    <p style="font-size: 18px; color: #0170fa;">150 บาท</p>
-                                </div>
-                                <div class="details-action w-full">
-                                    <button class="btn-decrement w-6 h-6" onclick="decrementNumb()">
-                                        <figure>
-                                            <img style="max-width: 18px" src="/images/icons/minus.png" alt="">
-                                        </figure>
-                                    </button>
-                                    <div class="show-quantity">
-                                        <div class="show-quantity-number">
-                                            <p class="text-[22px]">1</p>
-                                        </div>
-                                    </div>
-                                    <button class="btn-increment w-6 h-6" onclick="incrementNumb()">
-                                        <figure>
-                                            <img style="max-width: 18px;" src="/images/icons/plus.png" alt="">
-                                        </figure>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="box-details-action flex flex-col items-center w-[15%]">
-                                <button>
-                                    <img src="/images/icons/delete2.png" alt="" style="max-width: 30px">
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -145,8 +103,25 @@
         }
 
         function toConfirmOrder() {
-            console.log('to comfirm order')
             window.location.href = "/ordersummary"
+        }
+
+        function onDelete(_orderNumber, p_id, _quantity) {
+            Swal.fire({
+                text: "คุณต้องการลบสินค้าออกจากตะกร้าหรือไม่",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ลบ',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`/orderitem/delete?ordernumber=${_orderNumber}&pid=${p_id}&quantity=${_quantity}`).then(() => {
+                        Swal.fire('ลบสินค้าสำเร็จ').then(() => window.location.reload())
+                    }).catch((err) => console.log(err))
+                }
+            })
         }
     </script>
 @endsection

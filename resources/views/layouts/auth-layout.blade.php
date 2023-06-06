@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link rel="stylesheet" href="/css/layout.css" />
     @yield('style')
     <title>Gas Delivery</title>
@@ -20,7 +21,7 @@
                     <img src="/images/logo/gas-logo.png" class="h-10 mr-0" alt="gas-logo" />
                     <span class="self-center text-xl font-semibold whitespace-nowrap text-white">GAS DELIVERY</span></a>
                 <div class="flex items-center md:order-2">
-                    <div class="btn-cart">
+                    <div class="btn-cart" cart-notify="{{ $cart_notify }}">
                         <button type="button" data-dropdown-toggle="language-dropdown-menu" onclick="goToCart()"
                             class="lang-button inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-white dark:text-white rounded-lg cursor-pointer hover:bg-gray-700 dark:hover:bg-gray-700 dark:hover:text-white">
                             <p style="font-size: 18px">ตะกร้า</p>
@@ -100,7 +101,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
         integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.csrf_token = "{{ csrf_token() }}"
@@ -111,6 +111,8 @@
 
         const langBtn = document.querySelector('.lang-button')
         const langMenuBtn = document.querySelector('.menu-language-button')
+        const notify = document.querySelector('.btn-cart').getAttribute('cart-notify')
+
         langBtn.addEventListener('click', function() {
             const langDropdown = document.querySelector('.lang-dropdown')
             langDropdown.classList.toggle('show')
@@ -131,7 +133,7 @@
         }
 
         function goToCart() {
-            if (window.location.pathname === "/cart") return false;
+            if (window.location.pathname === "/cart" || parseInt(notify) <= 0) return false;
             window.location.href = "/cart";
         }
     </script>

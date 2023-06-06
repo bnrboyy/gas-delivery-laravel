@@ -21,6 +21,7 @@ Route::get('/product-details/{product_id}', [GasController::class, 'getProductBy
 Route::get('/cart', [GasController::class, 'cartDetails']);
 
 Route::post('/create/ordertemp', [OrderController::class, 'createOrderTemp']);
+Route::delete('/orderitem/delete', [OrderController::class, 'onDeleteOrderItem']);
 
 
 Route::get('/ordersummary', [VendingAndCafeController::class, 'orderSummary']);

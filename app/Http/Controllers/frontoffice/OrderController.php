@@ -107,4 +107,28 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
+    public function onDeleteOrderItem(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            OrderItem::where(['orders_number' => $request->ordernumber, 'product_id' => $request->pid, 'quantity' => $request->quantity])->delete();
+
+            DB::commit();
+            return response([
+                'message' => 'ok',
+                'description' => 'Delete order item success.',
+                'status' => true,
+            ], 200);
+
+        } catch(Exception $e) {
+            DB::rollBack();
+            return response([
+                'message' => 'error',
+                'status' => false,
+                'description' => 'Something went wrong.',
+                'errorMessage' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

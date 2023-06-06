@@ -64,6 +64,11 @@ class GasController extends Controller
         $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
         $orderTemp = OrderTemp::where(['orders_number' => $orderNumber])->first();
 
+        if (count($orderItem) <= 0) {
+            OrderTemp::where(['orders_number' => $orderNumber])->delete();
+            return redirect('/');
+        }
+
         $orderItem = DB::table('order_items')
                         ->select('order_items.*', 'products.*')
                         ->join('products', 'order_items.product_id', '=', 'products.id')
