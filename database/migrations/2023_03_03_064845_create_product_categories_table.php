@@ -18,15 +18,15 @@ return new class extends Migration
             $table->id('id');
             $table->string('title')->nullable();
             $table->string('details')->nullable();
-            $table->boolean('display')->default(true);
-            $table->boolean('is_food')->default(false);
             $table->string('thumbnail_title')->nullable();
             $table->string('thumbnail_link')->nullable();
-            $table->string('thumbnail_size')->nullable();
             $table->string('thumbnail_alt')->nullable();
+            $table->boolean('display')->default(true);
+
             $table->string('language');
             $table->boolean('defaults');
             $table->unique(['language', 'id']);
+            $table->boolean('is_new_product')->default(false);
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
@@ -35,127 +35,43 @@ return new class extends Migration
 
         DB::table('product_categories')->insert([
             [
-                'title' => 'Clothing type',
+                'title' => 'เปลี่ยนถัง',
                 'details' => '',
                 'thumbnail_title' => '',
                 'thumbnail_link' => '',
-                'thumbnail_size' => '',
+                'thumbnail_alt' => '',
                 'display' => true,
-                'is_food' => false,
+                'is_new_product' => false,
                 'language' => 'th',
                 'defaults' => true
             ],
             [
-                'title' => 'Washing or Drying',
+                'title' => 'ถังแก๊ส',
                 'details' => '',
                 'thumbnail_title' => '',
                 'thumbnail_link' => '',
-                'thumbnail_size' => '',
+                'thumbnail_alt' => '',
                 'display' => true,
-                'is_food' => false,
+                'is_new_product' => true,
                 'language' => 'th',
                 'defaults' => true
+
             ],
             [
-                'title' => 'Capacity(kg)',
-                'details' => 'The choice will  affect the price of using the service.',
+                'title' => 'อุปกรณ์อื่นๆ',
+                'details' => '',
                 'thumbnail_title' => '',
                 'thumbnail_link' => '',
-                'thumbnail_size' => '',
+                'thumbnail_alt' => '',
                 'display' => true,
-                'is_food' => false,
+                'is_new_product' => true,
                 'language' => 'th',
                 'defaults' => true
+
             ],
-            [
-                'title' => 'Water Temperature ',
-                'details' => 'The choice will affect the price of using the service.',
-                'thumbnail_title' => '',
-                'thumbnail_link' => '',
-                'thumbnail_size' => '',
-                'display' => true,
-                'is_food' => false,
-                'language' => 'th',
-                'defaults' => true
-            ],
-            [
-                'title' => 'Drying time',
-                'details' => 'The choice will affect the price of using the service.',
-                'thumbnail_title' => '',
-                'thumbnail_link' => '',
-                'thumbnail_size' => '',
-                'display' => true,
-                'is_food' => false,
-                'language' => 'th',
-                'defaults' => true
-            ],
-            [
-                'title' => 'Snack',
-                'details' => '',
-                'thumbnail_title' => '',
-                'thumbnail_link' => 'images/icons/cookie.svg',
-                'thumbnail_size' => '',
-                'display' => true,
-                'is_food' => true,
-                'language' => 'th',
-                'defaults' => true
-            ],
-            [
-                'title' => 'Bread',
-                'details' => '',
-                'thumbnail_title' => '',
-                'thumbnail_link' => 'images/icons/pie.svg',
-                'thumbnail_size' => '',
-                'display' => true,
-                'is_food' => true,
-                'language' => 'th',
-                'defaults' => true
-            ],
-            [
-                'title' => 'Easy Food',
-                'details' => '',
-                'thumbnail_title' => '',
-                'thumbnail_link' => 'images/icons/50-02.svg',
-                'thumbnail_size' => '',
-                'display' => true,
-                'is_food' => true,
-                'language' => 'th',
-                'defaults' => true
-            ],
-            [
-                'title' => 'Fruit',
-                'details' => '',
-                'thumbnail_title' => '',
-                'thumbnail_link' => 'images/icons/lemon.svg',
-                'thumbnail_size' => '',
-                'display' => true,
-                'is_food' => true,
-                'language' => 'th',
-                'defaults' => true
-            ],
-            [
-                'title' => 'Drink',
-                'details' => '',
-                'thumbnail_title' => '',
-                'thumbnail_link' => 'images/icons/drink.svg',
-                'thumbnail_size' => '',
-                'display' => true,
-                'is_food' => true,
-                'language' => 'th',
-                'defaults' => true
-            ],
-            [
-                'title' => 'Milk',
-                'details' => '',
-                'thumbnail_title' => '',
-                'thumbnail_link' => 'images/icons/milk1.svg',
-                'thumbnail_size' => '',
-                'display' => true,
-                'is_food' => true,
-                'language' => 'th',
-                'defaults' => true
-            ],
+
         ]);
+
     }
 
     /**

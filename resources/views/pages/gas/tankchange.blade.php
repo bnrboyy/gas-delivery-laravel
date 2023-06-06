@@ -15,17 +15,20 @@
         </div>
         <div class="content flex w-full h-full justify-center overflow-y-auto">
             <div class="content-products w-full h-full">
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
+                @foreach ($products as $product)
+                    <div class="card-item" productId="{{ $product->id }}">
+                        <div class="content-head">
+                            <img src="{{ $product->thumbnail_link }}" alt="">
+                        </div>
+                        <div class="product-details w-full flex flex-col space-y-4">
+                            <p class="text-lg">{{ $product->title }}</p>
+                            <span class="text-xl text-sky-500/100">ราคา : {{ $product->price }} บาท</span>
 
+                        </div>
                     </div>
-                </div>
-                <div class="card-item">
+                @endforeach
+
+                {{-- <div class="card-item">
                     <div class="content-head">
                         <img src="/images/gas/gas-cylinder.png" alt="">
                     </div>
@@ -123,7 +126,7 @@
                         <p class="text-lg">ถัง 18 kg. สีแดง</p>
                         <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -135,13 +138,13 @@
         const card_items = document.querySelectorAll(".card-item")
         card_items.forEach((item) => {
             item.addEventListener('click', () => {
+                let id = item.getAttribute('productId')
                 item.classList.toggle('active')
                 setTimeout(() => {
                     item.classList.toggle('active')
-                    window.location.href = `/product-details/${1}`
+                    window.location.href = `/product-details/${id}`
                 }, 200);
             })
         })
     </script>
-
 @endsection

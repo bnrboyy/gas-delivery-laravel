@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\LanguageAvailable;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\OrderTemp;
 use App\Models\ProductCategory;
 use App\Models\ProductMoreDetail;
@@ -20,11 +21,13 @@ use App\Models\ProductMoreDetail;
 class VendingAndCafeController extends Controller
 {
     /* Vending and Cafe */
-    public function tankchangeOrdering(Request $req)
+    public function tankchangeOrdering(Request $request)
     {
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
 
         $lang_default = LanguageAvailable::where(['defaults' => 1])->first();
-        $lang = $req->session()->get('language') ? $req->session()->get('language') : $lang_default->abbv_name;
+        $lang = $request->session()->get('language') ? $request->session()->get('language') : $lang_default->abbv_name;
         $branch = BranchInfo::get();
         $title = Category::whereIn('id', range('15', '16'))->get();
         $category = $this->queryCategory(14);
@@ -32,7 +35,7 @@ class VendingAndCafeController extends Controller
         $language_available = LanguageAvailable::orderBy('defaults', 'desc')->get();
         $lang_active = LanguageAvailable::where(['abbv_name' => $lang])->first();
 
-        $order = OrderTemp::where(['orders_number' => $req->session()->get('orders_number'), 'type_order' => 'foods'])->first();
+        $order = OrderTemp::where(['orders_number' => $request->session()->get('orders_number'), 'type_order' => 'foods'])->first();
         if ($order) {
             // return redirect('/foods/cart');
         }
@@ -41,38 +44,47 @@ class VendingAndCafeController extends Controller
             'title' => $title,
             'banner' => $banner,
             'category' => $category,
-            'content_language' => $this->getContentLanguage($req->session()->get('language')),
+            'content_language' => $this->getContentLanguage($request->session()->get('language')),
             'language_available' => $language_available,
             'language_active' => $lang_active,
-            'cart_notify' => 4,
+            'cart_notify' => count($orderItem),
         ]);
     }
 
 
     public function productDetails(Request $request) {
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
 
         return view('pages.gas.product-details', [
-            'cart_notify' => 4,
+            'cart_notify' => count($orderItem),
 
         ]);
     }
 
     public function cartDetails(Request $request) {
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
+
         return view('pages.gas.cart', [
-            'cart_notify' => 4,
+            'cart_notify' => count($orderItem),
         ]);
     }
 
     public function orderSummary(Request $request) {
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
         return view('pages.gas.order-summary', [
-            'cart_notify' => 4,
+            'cart_notify' => count($orderItem),
         ]);
     }
 
-    public function searchOrder(Request $reqeust) {
+    public function searchOrder(Request $request) {
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
 
         return view('pages.gas.search-order', [
-            'cart_notify' => 4,
+            'cart_notify' => count($orderItem),
         ]);
     }
 

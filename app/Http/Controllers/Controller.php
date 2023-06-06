@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\LanguageAvailable;
 use App\Models\LanguageConfig;
 use App\Models\MemberAccount;
+use App\Models\OrderItem;
 use App\Models\WebInfo;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -554,9 +555,13 @@ class Controller extends BaseController
         return $res;
     }
 
-    public function getCurrentLanguage($lang) {
+    public function getCurrentLanguage($lang)
+    {
         $lang_default = LanguageAvailable::where(['defaults' => 1])->first();
         $language = $lang ? $lang : $lang_default->abbv_name;
         return $language;
     }
+
+    /* Gas delibery */
+
 }

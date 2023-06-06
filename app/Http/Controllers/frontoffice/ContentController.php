@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\LanguageAvailable;
 use App\Models\LanguageConfig;
+use App\Models\OrderItem;
 use App\Models\Post;
 use App\Models\WebInfo;
 use Illuminate\Http\Request;
@@ -14,6 +15,9 @@ class ContentController extends Controller
 {
     public function getPage(Request $request)
     {
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
+
         $lang_default = LanguageAvailable::where(['defaults' => 1])->first();
         $lang = $request->session()->get('language')?$request->session()->get('language'):$lang_default->abbv_name;
         $infos = $this->getWebInfo('', $lang);
@@ -34,7 +38,7 @@ class ContentController extends Controller
                 'content_language' => $this->getContentLanguage($request->session()->get('language')),
                 'language_available' => $language_available,
                 'language_active' => $lang_active,
-                'cart_notify' => 4,
+                'cart_notify' => count($orderItem),
             ]);
         }
 

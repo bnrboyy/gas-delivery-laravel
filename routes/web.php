@@ -16,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/tankchange', [VendingAndCafeController::class, 'tankchangeOrdering']);
-Route::get('/product-details/{product_id}', [VendingAndCafeController::class, 'productDetails']);
-Route::get('/cart', [VendingAndCafeController::class, 'cartDetails']);
+Route::get('/tankchange', [GasController::class, 'tankChangeContent']);
+Route::get('/product-details/{product_id}', [GasController::class, 'getProductById']);
+Route::get('/cart', [GasController::class, 'cartDetails']);
+
+Route::post('/create/ordertemp', [OrderController::class, 'createOrderTemp']);
+
+
 Route::get('/ordersummary', [VendingAndCafeController::class, 'orderSummary']);
 Route::get('/searchorder', [VendingAndCafeController::class, 'searchOrder']);
 

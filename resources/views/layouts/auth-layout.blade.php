@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/css/layout.css" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     @yield('style')
     <title>Gas Delivery</title>
     @yield('style')
@@ -27,7 +26,9 @@
                             <p style="font-size: 18px">ตะกร้า</p>
                             <img class="rounded-full mr-1 w-7" src="/images/icons/add-to-cart.png" alt="">
                         </button>
-                        <div class="cart-notify">{{$cart_notify}}</div>
+                        @if ($cart_notify > 0)
+                            <div class="cart-notify">{{ $cart_notify }}</div>
+                        @endif
                     </div>
 
                     <!-- Dropdown -->
@@ -83,7 +84,9 @@
                         </li>
                         <li>
                             <a href="/searchorder"
-                                class="flex gap-[3px] py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"><img src="/images/icons/search.png" alt="" style="max-width: 25px;">คำสั่งซื้อ</a>
+                                class="flex gap-[3px] py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"><img
+                                    src="/images/icons/search.png" alt=""
+                                    style="max-width: 25px;">คำสั่งซื้อ</a>
                         </li>
                     </ul>
                 </div>
@@ -93,15 +96,19 @@
     <main>
         @yield('sections')
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
-        integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // var loader = document.getElementById("loader");
-        // window.addEventListener("load", function() {
-        //     loader.style.display = "none";
-        // });
+        window.csrf_token = "{{ csrf_token() }}"
+        axios.defaults.headers.common = {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': window.csrf_token
+        };
+
         const langBtn = document.querySelector('.lang-button')
         const langMenuBtn = document.querySelector('.menu-language-button')
         langBtn.addEventListener('click', function() {
@@ -127,7 +134,6 @@
             if (window.location.pathname === "/cart") return false;
             window.location.href = "/cart";
         }
-
     </script>
     @yield('scripts')
 </body>

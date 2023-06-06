@@ -34,16 +34,16 @@
                 </div>
                 <div class="details-item flex flex-col gap-2">
                     <div class="box-details w-full">
-                        <p>Lorem ipsum dolor sit amet </p>
-                        <p>Lorem ipsum dolor sit amet </p>
+                        <p>{{ $data->details }}</p>
+                        <p>{{ $data->details }}</p>
                     </div>
                     <div class="flex w-full h-[80px]">
                         <input class="w-full" type="text" placeholder="รายละเอียดเพิ่มเติม">
                     </div>
-                    <div class="box-details-action w-full">
-                        <p>ราคารวม: <span style="color: #0170fa;">269 บาท</span> </p>
+                    <div class="box-details-action product-price w-full" productPrice="{{ $data->price }}">
+                        <p>ราคารวม: <span style="color: #0170fa;">{{ $data->price }} บาท</span> </p>
 
-                        <button class="btn-addToCart">เพิ่มสินค้า</button>
+                        <button onclick="addToCart({{ $data->id }})" class="btn-addToCart">เพิ่มสินค้า</button>
                     </div>
                 </div>
             </div>
@@ -57,16 +57,53 @@
         const btn_decrement = document.querySelector(".btn-decrement")
         const show_number = document.querySelector(".show-quantity-number p");
 
+        const productPrice = parseInt(document.querySelector(".product-price").getAttribute("productPrice"))
+        const totalShow = document.querySelector(".box-details-action span")
+        let totalPrice = productPrice;
+        let quantity = 1;
+
         btn_decrement.addEventListener('click', () => {
             if (parseInt(show_number.innerText) === 1) return false;
             show_number.innerHTML = `${parseInt(show_number.innerText) - 1}`;
+            totalPrice = totalPrice - productPrice;
+            totalShow.innerHTML = totalPrice + " บาท"
+            quantity--;
         })
         btn_increment.addEventListener('click', () => {
             if (parseInt(show_number.innerText) === 5) return false;
             show_number.innerHTML = `${parseInt(show_number.innerText) + 1}`;
+            totalPrice = totalPrice + productPrice;
+            totalShow.innerHTML = totalPrice + " บาท"
+            quantity++;
         })
 
+        function addToCart(_id) {
+            const data = {
+                p_id: _id,
+                quantity: quantity,
+                requirements: '',
+            }
+
+            axios.post('/create/ordertemp', data).then((result) => {
+                console.log(result.data)
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'เพิ่มสินค้าสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(() => {
+                    window.location.reload();
+                })
+            }).catch((err) => {
+                console.log(err)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+            });
+
+        }
     </script>
-
 @endsection
-
