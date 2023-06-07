@@ -85,7 +85,6 @@
             }
 
             axios.post('/create/ordertemp', data).then((result) => {
-                console.log(result.data)
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',

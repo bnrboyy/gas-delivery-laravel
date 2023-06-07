@@ -61,7 +61,7 @@ class GasController extends Controller
     public function cartDetails(Request $request)
     {
         $orderNumber = $request->session()->get('orders_number');
-        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
+        $orderItem = OrderItem::where('orders_number', $orderNumber)->get();
         $orderTemp = OrderTemp::where(['orders_number' => $orderNumber])->first();
 
         if (count($orderItem) <= 0) {
@@ -69,21 +69,62 @@ class GasController extends Controller
             return redirect('/');
         }
 
-        $orderItem = DB::table('order_items')
-                        ->select('order_items.*', 'products.*')
-                        ->join('products', 'order_items.product_id', '=', 'products.id')
-                        ->get();
+        $orderItemList = DB::table('order_items')
+            ->select('order_items.*', 'products.title', 'products.cate_id', 'products.details', 'products.more_details', 'products.price', 'products.display', 'products.thumbnail_link')
+            ->where('order_items.orders_number', '=', $orderNumber)
+            ->leftjoin('products', 'order_items.product_id', '=', 'products.id')
+            ->orderBy('order_items.id', 'desc')
+            ->get();
+
 
         $totalPrice = 0;
-        foreach ($orderItem as $key => $value) {
+        foreach ($orderItemList as $key => $value) {
             $totalPrice += ($value->price * $value->quantity);
         }
 
         return view('pages.gas.cart', [
             'order_temp' => $orderTemp,
-            'order_items' => $orderItem,
+            'order_items' => $orderItemList,
             'total_price' => $totalPrice,
             'cart_notify' => count($orderItem),
+        ]);
+    }
+
+    public function orderSummary(Request $request)
+    {
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
+        $orderTemp = OrderTemp::where(['orders_number' => $orderNumber])->first();
+
+        $infos = $this->getWebInfo('', 'th');
+        $webInfo = $this->infoSetting($infos);
+
+        $orderItemList = DB::table('order_items')
+            ->select('order_items.*', 'products.title', 'products.cate_id', 'products.details', 'products.more_details', 'products.price', 'products.display', 'products.thumbnail_link')
+            ->where('order_items.orders_number', '=', $orderNumber)
+            ->leftjoin('products', 'order_items.product_id', '=', 'products.id')
+            ->orderBy('order_items.id', 'desc')
+            ->get();
+
+        if (count($orderItem) <= 0) {
+            OrderTemp::where(['orders_number' => $orderNumber])->delete();
+            return redirect('/');
+        }
+
+        $totalPrice = 0;
+        foreach ($orderItemList as $key => $value) {
+            $totalPrice += ($value->price * $value->quantity);
+        }
+
+        return view('pages.gas.order-summary', [
+            'order_temp' => $orderTemp,
+            'cart_notify' => count($orderItem),
+            'order_items' => $orderItemList,
+            'total_price' => $totalPrice,
+            'delivery_price' => $webInfo->settings->delivery_price->value,
+            'price_per_kilo' => (int)$webInfo->settings->price_per_kilo->value,
+            'maximum_radius' => $webInfo->settings->maximum_radius->value,
+
         ]);
     }
 }

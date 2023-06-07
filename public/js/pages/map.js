@@ -43,11 +43,11 @@ function initMap() {
     );
 
     const branchCircle = new google.maps.Circle({
-        strokeColor: "#EDFEA2",
-        strokeOpacity: 0.8,
+        strokeColor: "#34eb5b",
+        strokeOpacity: 0.3,
         strokeWeight: 2,
-        fillColor: "#EDFEA2",
-        fillOpacity: 0.35,
+        fillColor: "#34eb5b",
+        fillOpacity: 0.1,
         map,
         center: branchLatlng,
         radius: maximum_radius * 1000,

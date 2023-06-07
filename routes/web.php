@@ -19,12 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/tankchange', [GasController::class, 'tankChangeContent']);
 Route::get('/product-details/{product_id}', [GasController::class, 'getProductById']);
 Route::get('/cart', [GasController::class, 'cartDetails']);
+Route::get('/ordersummary', [GasController::class, 'orderSummary']);
 
 Route::post('/create/ordertemp', [OrderController::class, 'createOrderTemp']);
 Route::delete('/orderitem/delete', [OrderController::class, 'onDeleteOrderItem']);
+Route::get('/cart/item/updatequantity/{id}', [OrderController::class, 'updateQuantity']);
 
-
-Route::get('/ordersummary', [VendingAndCafeController::class, 'orderSummary']);
 Route::get('/searchorder', [VendingAndCafeController::class, 'searchOrder']);
 
 

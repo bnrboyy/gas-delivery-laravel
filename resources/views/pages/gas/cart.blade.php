@@ -36,7 +36,8 @@
                                         <p style="font-size: 18px; color: #0170fa;">{{ $item->price }} บาท</p>
                                     </div>
                                     <div class="details-action flex justify-start w-full">
-                                        <button class="btn-decrement w-6 h-6" onclick="decrementNumb()">
+                                        <button class="btn-decrement w-6 h-6"
+                                            onclick="decrementNumb('{{ $item->id }}', '{{ $item->quantity - 1 }}', '{{ $item->quantity }}')">
                                             <figure>
                                                 <img style="max-width: 18px" src="/images/icons/minus.png" alt="">
                                             </figure>
@@ -46,7 +47,8 @@
                                                 <p class="text-[22px]">{{ $item->quantity }}</p>
                                             </div>
                                         </div>
-                                        <button class="btn-increment w-6 h-6" onclick="incrementNumb()">
+                                        <button class="btn-increment w-6 h-6"
+                                            onclick="incrementNumb('{{ $item->id }}', '{{ $item->quantity + 1 }}', '{{ $item->quantity }}')">
                                             <figure>
                                                 <img style="max-width: 18px;" src="/images/icons/plus.png" alt="">
                                             </figure>
@@ -56,7 +58,7 @@
 
                                 <div class="box-details-action flex flex-col items-center w-[15%]">
                                     <button
-                                        onclick="onDelete('{{ $order_temp->orders_number }}', '{{ $item->product_id }}', '{{ $item->quantity }}')">
+                                        onclick="onDelete('{{ $order_temp->orders_number }}', '{{ $item->product_id }}', '{{ $item->id }}')">
                                         <img src="/images/icons/delete2.png" alt="" style="max-width: 30px">
                                     </button>
                                 </div>
@@ -86,16 +88,20 @@
 
 @section('scripts')
     <script>
-        const quantityNumb = document.querySelector('.show-quantity-number p');
-
-        function incrementNumb() {
-            if (parseInt(quantityNumb.innerText) === 5) return false;
-            quantityNumb.innerHTML = parseInt(quantityNumb.innerText) + 1;
+        function incrementNumb(_id, _newQuantity, _quantity) {
+            if (parseInt(_quantity) === 5) return false;
+            axios.get(`/cart/item/updatequantity/${_id}?quantity=${_newQuantity}`).then((res) => {
+                console.log(res.data)
+                window.location.reload();
+            }).catch((err) => console.log(err))
         }
 
-        function decrementNumb() {
-            if (parseInt(quantityNumb.innerText) === 1) return false;
-            quantityNumb.innerHTML = parseInt(quantityNumb.innerText) - 1;
+        function decrementNumb(_id, _newQuantity, _quantity) {
+            if (parseInt(_quantity) === 1) return false;
+            axios.get(`/cart/item/updatequantity/${_id}?quantity=${_newQuantity}`).then((res) => {
+                console.log(res.data)
+                window.location.reload();
+            }).catch((err) => console.log(err))
         }
 
         function addItem() {
@@ -106,7 +112,7 @@
             window.location.href = "/ordersummary"
         }
 
-        function onDelete(_orderNumber, p_id, _quantity) {
+        function onDelete(_orderNumber, p_id, _id) {
             Swal.fire({
                 text: "คุณต้องการลบสินค้าออกจากตะกร้าหรือไม่",
                 icon: 'warning',
@@ -117,9 +123,18 @@
                 cancelButtonText: 'ยกเลิก'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete(`/orderitem/delete?ordernumber=${_orderNumber}&pid=${p_id}&quantity=${_quantity}`).then(() => {
-                        Swal.fire('ลบสินค้าสำเร็จ').then(() => window.location.reload())
-                    }).catch((err) => console.log(err))
+                    axios.delete(`/orderitem/delete?ordernumber=${_orderNumber}&pid=${p_id}&id=${_id}`)
+                        .then(() => {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'ลบสินค้าสำเร็จ',
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(() => {
+                                window.location.reload();
+                            })
+                        }).catch((err) => console.log(err))
                 }
             })
         }

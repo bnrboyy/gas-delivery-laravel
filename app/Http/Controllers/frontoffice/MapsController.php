@@ -13,10 +13,10 @@ class MapsController extends Controller
 
         $orderNumber = $request->session()->get('orders_number');
         $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
-        // $infos = $this->getWebInfo('', $request->session()->get('language'));
-        // $webInfo = $this->infoSetting($infos);
+        $infos = $this->getWebInfo('', 'th');
+        $webInfo = $this->infoSetting($infos);
         return view('pages.map-system.map', [
-            'maximum_radius' => 3,
+            'maximum_radius' => $webInfo->settings->maximum_radius->value,
             'cart_notify' => count($orderItem),
         ]);
     }

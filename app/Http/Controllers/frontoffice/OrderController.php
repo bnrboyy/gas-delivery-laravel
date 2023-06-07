@@ -112,7 +112,7 @@ class OrderController extends Controller
     {
         try {
             DB::beginTransaction();
-            OrderItem::where(['orders_number' => $request->ordernumber, 'product_id' => $request->pid, 'quantity' => $request->quantity])->delete();
+            OrderItem::where(['orders_number' => $request->ordernumber, 'product_id' => $request->pid, 'id' => $request->id])->delete();
 
             DB::commit();
             return response([
@@ -120,8 +120,100 @@ class OrderController extends Controller
                 'description' => 'Delete order item success.',
                 'status' => true,
             ], 200);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response([
+                'message' => 'error',
+                'status' => false,
+                'description' => 'Something went wrong.',
+                'errorMessage' => $e->getMessage()
+            ], 500);
+        }
+    }
 
-        } catch(Exception $e) {
+    // public function decrementItem(Request $request)
+    // {
+    //     try {
+    //         DB::beginTransaction();
+    //         $item = OrderItem::where('id', $request->id)->first();
+    //         if (!$item) {
+    //             return response([
+    //                 'message' => 'error',
+    //                 'description' => 'order not found!'
+    //             ], 404);
+    //         }
+    //         $item->quantity -= 1;
+    //         $item->save();
+
+    //         DB::commit();
+    //         return response([
+    //             'message' => 'ok',
+    //             'description' => 'Decrement item success.',
+    //             'status' => true,
+    //         ], 200);
+    //     } catch (Exception $e) {
+    //         DB::rollBack();
+    //         return response([
+    //             'message' => 'error',
+    //             'status' => false,
+    //             'description' => 'Something went wrong.',
+    //             'errorMessage' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
+
+    // public function incrementItem(Request $request)
+    // {
+    //     try {
+    //         DB::beginTransaction();
+    //         $item = OrderItem::where('id', $request->id)->first();
+    //         if (!$item) {
+    //             return response([
+    //                 'message' => 'error',
+    //                 'description' => 'order not found!'
+    //             ], 404);
+    //         }
+    //         $item->quantity += 1;
+    //         $item->save();
+
+    //         DB::commit();
+    //         return response([
+    //             'message' => 'ok',
+    //             'description' => 'Increment item success.',
+    //             'status' => true,
+    //         ], 200);
+    //     } catch (Exception $e) {
+    //         DB::rollBack();
+    //         return response([
+    //             'message' => 'error',
+    //             'status' => false,
+    //             'description' => 'Something went wrong.',
+    //             'errorMessage' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
+
+    public function updateQuantity(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $item = OrderItem::where('id', $request->id)->first();
+            if (!$item) {
+                return response([
+                    'message' => 'error',
+                    'description' => 'order not found!'
+                ], 404);
+            }
+            $item->quantity = $request->quantity;
+            $item->save();
+
+            DB::commit();
+            return response([
+                'message' => 'ok',
+                'description' => 'Update item quantity success.',
+                'status' => true,
+            ], 200);
+        } catch (Exception $e) {
             DB::rollBack();
             return response([
                 'message' => 'error',

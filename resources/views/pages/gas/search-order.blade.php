@@ -14,7 +14,7 @@
                 <p>รายการคำสั่งซื้อ</p>
             </div>
             <div class="flex justify-center md:justify-end items-center gap-2 w-full md:w-1/2 h-full">
-                <input class="border-none rounded h-[30px] md:h-[40px]" type="number" placeholder="กรอกเบอร์โทร" style="box-shadow: 4px 4px 10px #b4c1d5;">
+                <input onkeydown="return event.keyCode !== 69" class="border-none rounded h-[30px] md:h-[40px]" type="number" placeholder="กรอกเบอร์โทร" style="box-shadow: 4px 4px 10px #b4c1d5;">
                 <button class="w-[30px] md:w-[40px] h-[30px] md:h-[40px] bg-white rounded p-2" style="box-shadow: 4px 4px 10px #b4c1d5;">
                     <figure>
                         <img src="images/icons/magnifying-glass.png" alt="">
