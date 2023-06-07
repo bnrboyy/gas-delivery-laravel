@@ -377,7 +377,7 @@ return new class extends Migration
                 'admin_level' => 3,
                 'language' => "th",
                 'defaults' => 1,
-                'info_value' => '100',
+                'info_value' => '20',
                 'info_link' => '',
                 'info_iframe' => '',
                 'info_attribute' => ''
@@ -407,7 +407,7 @@ return new class extends Migration
                 'admin_level' => 3,
                 'language' => "th",
                 'defaults' => 1,
-                'info_value' => '5',
+                'info_value' => '3',
                 'info_link' => '',
                 'info_iframe' => '',
                 'info_attribute' => ''
@@ -422,7 +422,7 @@ return new class extends Migration
                 'admin_level' => 3,
                 'language' => "th",
                 'defaults' => 1,
-                'info_value' => '30',
+                'info_value' => '10',
                 'info_link' => '',
                 'info_iframe' => '',
                 'info_attribute' => ''
@@ -438,6 +438,21 @@ return new class extends Migration
                 'language' => "th",
                 'defaults' => 1,
                 'info_value' => 'FZVfeGv2vcs1g0yNted8T3DjSsL0Geq2PgkjSfnqJpD',
+                'info_link' => '',
+                'info_iframe' => '',
+                'info_attribute' => ''
+            ],
+            [
+                'info_id' => 28,
+                'info_id' => 0,
+                'info_type' => 5,
+                'info_param' => "branch_location",
+                'info_title' => "Branch Location",
+                'info_priority' => 1,
+                'admin_level' => 3,
+                'language' => "th",
+                'defaults' => 1,
+                'info_value' => "16.432089757827352,102.82368338565885",
                 'info_link' => '',
                 'info_iframe' => '',
                 'info_attribute' => ''

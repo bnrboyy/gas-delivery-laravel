@@ -24,16 +24,14 @@ return new class extends Migration
             $table->string('customer_name')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('second_phone_number')->nullable();
-            $table->text('details')->nullable();
             $table->dateTime('transaction_date')->nullable()->comment('วันที่ทำรายการ');
             $table->dateTime('shipping_date')->nullable()->comment('วันที่รับบริการ');
-            $table->dateTime('date_pickup')->nullable();
-            $table->dateTime('date_drop')->nullable();
-            $table->string('drop_image')->nullable();
-            $table->string('currency')->nullable();
-            $table->integer('delivery_price')->default(0);
-            $table->string('distance')->default(0);
             $table->integer('total_price')->default(0);
+            $table->integer('delivery_price')->default(0);
+            $table->string('distance')->default(0)->comment('Km.');
+            $table->dateTime('date_drop')->nullable();
+            $table->dateTime('date_pickup')->nullable();
+            $table->string('drop_image')->nullable();
             $table->string('language')->default('th');
 
             $table->timestamp('created_at')->useCurrent();

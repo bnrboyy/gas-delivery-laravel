@@ -11,6 +11,8 @@ const popup = document.querySelector(".map-item-detail");
 const maximum_radius = document.querySelector(".maximum").getAttribute('data-maximum');
 const branch_location = localStorage.getItem("branch_location") || defaultLocation;
 
+localStorage.setItem('branch_location', defaultLocation);
+
 function initMap() {
     let isGetCurrent = false;
     if (params.get("type") === "pickup") {

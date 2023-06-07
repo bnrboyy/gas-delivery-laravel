@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\frontoffice;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\OrderPayment;
 use App\Models\OrderTemp;
 use App\Models\Product;
 use DateTime;
@@ -220,6 +222,83 @@ class OrderController extends Controller
                 'status' => false,
                 'description' => 'Something went wrong.',
                 'errorMessage' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function onConfirmOrder(Request $request)
+    {
+        // dd($request->all());
+
+        $validator = Validator::make($request->all(), [
+            'drop_location' => 'string|required',
+            'drop_address' => 'string|required',
+            'drop_address_detail' => 'string|nullable',
+            'customer_name' => 'string|required',
+            'phone_number' => 'string|required',
+            'second_phone_number' => 'string|nullable',
+            'payment_type' => 'string|required',
+            'distance' => 'numeric|required',
+            'total_price' => 'numeric|required',
+            'delivery_price' => 'numeric|required',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendErrorValidators('Invalid params', $validator->errors());
+        }
+
+
+        try {
+            DB::beginTransaction();
+            $files = $request->allFiles();
+            $orderNumber = $request->session()->get('orders_number');
+            $orderTemp = OrderTemp::where('orders_number', $orderNumber)->first();
+
+            $slip_image = "";
+            if (isset($files['slip_image'][0])) {
+                /* Upload Thumbnail */
+                $newFolder = "upload/" . date('Y') . "/" . date('m') . "/" . date('d') . "/";
+                $slip_image = $this->uploadImage($newFolder, $files['slip_image'][0], "", "", "");
+            }
+
+            $newOrder = new Order();
+            $newOrder->orders_number = $orderTemp->orders_number;
+            $newOrder->status_id = 2;
+            $newOrder->delivery_drop = $request->drop_location;
+            $newOrder->delivery_drop_address = $request->drop_address;
+            $newOrder->delivery_drop_address_more = $request->drop_address_detail;
+            $newOrder->customer_name = $request->customer_name;
+            $newOrder->phone_number = $request->phone_number;
+            $newOrder->second_phone_number = $request->second_phone_number;
+            $newOrder->transaction_date = $orderTemp->transaction_date;
+            $newOrder->delivery_price = (int)$request->delivery_price;
+            $newOrder->distance = $request->distance;
+            $newOrder->total_price = (int)$request->total_price;
+            $newOrder->save();
+
+
+            OrderPayment::insert([
+                'type' => $request->payment_type,
+                'orders_number' => $orderTemp->orders_number,
+                'time_pay' => new DateTime(),
+                'slip_image' => $slip_image,
+
+            ]);
+
+            $request->session()->forget('orders_number');
+            OrderTemp::where('orders_number', $orderNumber)->delete();
+
+            DB::commit();
+            return response([
+                'message' => 'ok',
+                'status' => true,
+                'description' => 'Create order success.'
+            ], 201);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response([
+                'message' => 'error',
+                'description' => $e->getMessage(),
+                'status' => false,
             ], 500);
         }
     }

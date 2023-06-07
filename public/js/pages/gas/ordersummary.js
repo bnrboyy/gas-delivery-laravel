@@ -12,15 +12,18 @@ const radio_tranfer = document.getElementById("radio-tranfer");
 const upload_slip = document.querySelector(".upload-slip");
 const bank_id = document.getElementById("bank-id");
 
-const maximum = parseInt(document
-    .querySelector(".web-info")
-    .getAttribute("maximum-radius"));
-const delivery_price = parseInt(document
-    .querySelector(".web-info")
-    .getAttribute("delivery-price"));
-const price_per_kilo = parseInt(document
-    .querySelector(".web-info")
-    .getAttribute("price-per-kilo"));
+const total_price_product = document
+    .querySelector(".total-price-product")
+    .getAttribute("total-price-product");
+const maximum = parseInt(
+    document.querySelector(".web-info").getAttribute("maximum-radius")
+);
+const delivery_price = parseInt(
+    document.querySelector(".web-info").getAttribute("delivery-price")
+);
+const price_per_kilo = parseInt(
+    document.querySelector(".web-info").getAttribute("price-per-kilo")
+);
 let distance = 0;
 let radius = 0;
 let shipping_fee = 0;
@@ -137,9 +140,32 @@ async function saveOrder(_orders) {
     formData.append("second_phone_number", _orders.second_phone);
     formData.append("payment_type", _orders.payment_type);
     formData.append("second_phone_number", _orders.second_phone);
+    formData.append("distance", (distance / 1000).toFixed(2));
+    formData.append("total_price", total_price_product);
+    formData.append("delivery_price", shipping_fee);
 
     if (_orders.payment_type === "transfer") {
         formData.append("slip_image[]", _orders.slip_image[0]);
+    }
+
+    const response = await axios.post("/order/confirmorder", formData);
+
+    if (response.data.status) {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "สั่งสินค้าสำเร็จ",
+            showConfirmButton: false,
+            timer: 2500,
+        }).then(() => {
+            window.location.href = "/searchorder";
+        });
+    } else {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+        });
     }
 }
 
@@ -180,7 +206,10 @@ function initMap() {
             if (Math.round(distance) <= maximum * 1000) {
                 shipping_fee = delivery_price;
             } else {
-                shipping_fee = delivery_price + Math.ceil((distance - (maximum * 1000)) / 1000) * price_per_kilo;
+                shipping_fee =
+                    delivery_price +
+                    Math.ceil((distance - maximum * 1000) / 1000) *
+                        price_per_kilo;
             }
             if (radius > maximum * 1000) {
                 clearLocationDrop();
@@ -189,7 +218,6 @@ function initMap() {
         }
     });
 }
-
 
 /* get Distance */
 function getRadius(_lat1, _lng1, _lat2, _lng2) {
@@ -219,7 +247,6 @@ function getRadius(_lat1, _lng1, _lat2, _lng2) {
     return distance;
 }
 
-
 function clearLocationDrop() {
     Swal.fire({
         position: "center",
@@ -239,8 +266,16 @@ function clearLocationDrop() {
 
 function setPriceShow() {
     const shipped = document.querySelector(".delivery-price span");
-    shipped.innerText = shipping_fee;
+    const distanceShow = document.querySelector(".delivery-price p");
+    const total_price_show = document.querySelector(".total-price");
+    const tt = total_price_show.getAttribute("total-price");
+    let distanceText = (distance / 1000).toFixed(2);
 
+    distanceShow.innerHTML = "ค่าจัดส่ง " + `(ประมาณ ${distanceText} Km. )`;
+    shipped.innerText = shipping_fee + " " + "บาท";
+    total_price_show.innerHTML = parseInt(tt) + shipping_fee + " " + "บาท";
 }
+
+setPriceShow();
 
 window.initMap = initMap;

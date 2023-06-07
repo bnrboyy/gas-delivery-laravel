@@ -158,7 +158,7 @@
                             </div> --}}
                         </div>
                         <div class="flex flex-col w-full h-[65px] sm:h-[80px] p-2">
-                            <div class="flex justify-between w-full text-[14px] sm:text-[18px]">
+                            <div class="total-price-product flex justify-between w-full text-[14px] sm:text-[18px]" total-price-product="{{ $total_price }}">
                                 <p>ราคาสินค้า</p>
                                 <p>{{ $total_price }} บาท</p>
                             </div>
@@ -175,7 +175,7 @@
                 <div class="flex w-full h-1/2 items-center justify-center gap-8">
                     <div class="w-[332px] h-full flex items-center justify-between px-2 font-bold">
                         <p>ราคารวม</p>
-                        <p>{{ $total_price + 20 }} บาท</p>
+                        <p class="total-price" total-price="{{ $total_price }}"></p>
                     </div>
                 </div>
                 <div class="flex w-full h-1/2 justify-center items-center gap-8 mb-2 px-2">
