@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('delivery_drop_address_more')->nullable();
             $table->string('customer_name')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('second_phone_number')->nullable();
+            $table->string('second_phone_number')->default('0');
             $table->dateTime('transaction_date')->nullable()->comment('วันที่ทำรายการ');
             $table->dateTime('shipping_date')->nullable()->comment('วันที่รับบริการ');
             $table->integer('total_price')->default(0);

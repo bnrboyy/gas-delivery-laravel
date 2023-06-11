@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BranchInfo;
 use App\Models\Category;
 use App\Models\LanguageAvailable;
+use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderTemp;
 use App\Models\Product;
@@ -124,6 +125,42 @@ class GasController extends Controller
             'delivery_price' => $webInfo->settings->delivery_price->value,
             'price_per_kilo' => (int)$webInfo->settings->price_per_kilo->value,
             'maximum_radius' => $webInfo->settings->maximum_radius->value,
+
+        ]);
+    }
+
+    public function searchOrder(Request $request)
+    {
+
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
+
+        $phone_number = $request->phone;
+
+        $orderDetails = Order::where(['phone_number' => $phone_number])->orWhere(['second_phone_number' => $phone_number])->orderBy('id', 'DESC')->get();
+
+        foreach ($orderDetails as $key => $value) {
+            if ($value->status_id == 2) {
+                $value->order_status = "รอคำยืนยันจากร้าน";
+            } else if ($value->status_id == 3) {
+                $value->order_status = "กำลังดำเนินการ";
+            } else if ($value->status_id == 4) {
+                $value->order_status = "เสร็จสิ้น";
+            } else if ($value->status_id == 5) {
+
+                $value->order_status = "ไม่สำเร็จ";
+            }
+
+            $value->order_items = DB::select("SELECT oi.*, p.title AS product_name , p.thumbnail_link AS product_img FROM order_items AS oi
+                                                LEFT JOIN products AS p ON p.id = oi.product_id
+                                                WHERE oi.orders_number = :orders_number
+                                                ORDER BY oi.id DESC"
+                                            , ["orders_number" => $value->orders_number]);
+        }
+
+        return view('pages.gas.search-order', [
+            'order_details' => $orderDetails,
+            'cart_notify' => count($orderItem),
 
         ]);
     }

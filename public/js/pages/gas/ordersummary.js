@@ -126,6 +126,7 @@ function confirmOrder() {
             return false;
         });
     } else {
+        localStorage.setItem('phone_number', orders.phone);
         saveOrder(orders);
     }
 }
@@ -149,6 +150,7 @@ async function saveOrder(_orders) {
     }
 
     const response = await axios.post("/order/confirmorder", formData);
+    const phone_number = localStorage.getItem("phone_number")
 
     if (response.data.status) {
         Swal.fire({
@@ -158,7 +160,7 @@ async function saveOrder(_orders) {
             showConfirmButton: false,
             timer: 2500,
         }).then(() => {
-            window.location.href = "/searchorder";
+            window.location.href = `/searchorder?phone=${phone_number}`;
         });
     } else {
         Swal.fire({

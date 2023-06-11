@@ -133,68 +133,6 @@ class OrderController extends Controller
         }
     }
 
-    // public function decrementItem(Request $request)
-    // {
-    //     try {
-    //         DB::beginTransaction();
-    //         $item = OrderItem::where('id', $request->id)->first();
-    //         if (!$item) {
-    //             return response([
-    //                 'message' => 'error',
-    //                 'description' => 'order not found!'
-    //             ], 404);
-    //         }
-    //         $item->quantity -= 1;
-    //         $item->save();
-
-    //         DB::commit();
-    //         return response([
-    //             'message' => 'ok',
-    //             'description' => 'Decrement item success.',
-    //             'status' => true,
-    //         ], 200);
-    //     } catch (Exception $e) {
-    //         DB::rollBack();
-    //         return response([
-    //             'message' => 'error',
-    //             'status' => false,
-    //             'description' => 'Something went wrong.',
-    //             'errorMessage' => $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
-
-    // public function incrementItem(Request $request)
-    // {
-    //     try {
-    //         DB::beginTransaction();
-    //         $item = OrderItem::where('id', $request->id)->first();
-    //         if (!$item) {
-    //             return response([
-    //                 'message' => 'error',
-    //                 'description' => 'order not found!'
-    //             ], 404);
-    //         }
-    //         $item->quantity += 1;
-    //         $item->save();
-
-    //         DB::commit();
-    //         return response([
-    //             'message' => 'ok',
-    //             'description' => 'Increment item success.',
-    //             'status' => true,
-    //         ], 200);
-    //     } catch (Exception $e) {
-    //         DB::rollBack();
-    //         return response([
-    //             'message' => 'error',
-    //             'status' => false,
-    //             'description' => 'Something went wrong.',
-    //             'errorMessage' => $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
-
     public function updateQuantity(Request $request)
     {
         try {
@@ -268,7 +206,7 @@ class OrderController extends Controller
             $newOrder->delivery_drop_address_more = $request->drop_address_detail;
             $newOrder->customer_name = $request->customer_name;
             $newOrder->phone_number = $request->phone_number;
-            $newOrder->second_phone_number = $request->second_phone_number;
+            $newOrder->second_phone_number = $request->second_phone_number ? $request->second_phone_number : $request->phone_number;
             $newOrder->transaction_date = $orderTemp->transaction_date;
             $newOrder->delivery_price = (int)$request->delivery_price;
             $newOrder->distance = $request->distance;
