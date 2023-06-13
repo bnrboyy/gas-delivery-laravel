@@ -14,7 +14,7 @@
                 <p>รายการคำสั่งซื้อ</p>
             </div>
             <div class="flex justify-center md:justify-end items-center gap-2 w-full md:w-1/2 h-full">
-                <input class="input-phone" onkeydown="return event.keyCode !== 69" class="border-none rounded h-[30px] md:h-[40px]" type="number" placeholder="กรอกเบอร์โทร" style="box-shadow: 4px 4px 10px #b4c1d5;">
+                <input onkeydown="return event.keyCode !== 69" class="input-phone border border-none rounded h-[30px] md:h-[40px]" type="number" placeholder="กรอกเบอร์โทร" style="box-shadow: 4px 4px 10px #b4c1d5; border: none; border-radius: 0.25rem;">
                 <button onclick="searchOrder()" class="w-[30px] md:w-[40px] h-[30px] md:h-[40px] bg-white rounded p-2" style="box-shadow: 4px 4px 10px #b4c1d5;">
                     <figure>
                         <img src="images/icons/magnifying-glass.png" alt="">
@@ -26,7 +26,7 @@
             @if (count($order_details) === 0)
                 <div class="flex items-center justify-center w-full">
                     <div class="flex items-center justify-center w-1/2 min-w-[300px] h-[6rem] rounded-xl text-[2rem]" style="box-shadow: 5px 5px 10px #b4c1d5;">
-                        <p>ไม่มีคำสั่งซื้อ</p>
+                        <p class="text-gray-500">ไม่มีคำสั่งซื้อ</p>
                     </div>
 
                 </div>
@@ -80,7 +80,7 @@
                                     <img src="images/icons/pin.png" alt="" width="30">
                                     <p class="text-gray-500 text-[16px]">สถานที่จัดส่ง:</p>
                                 </div>
-                                <p class="text-[18px]">{{$order_detail->delivery_drop_address}}</p>
+                                <p class="text-[14px] md:text-[18px]">{{$order_detail->delivery_drop_address}}</p>
                             </div>
                             <div class="flex gap-2 w-full items-center">
                                 <img src="images/icons/check-list.png" alt="" width="30">

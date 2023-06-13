@@ -20,7 +20,6 @@
                             </figure>
                         </button>
                         <div class="show-quantity">
-                            <p>จำนวน</p>
                             <div class="show-quantity-number">
                                 <p>1</p>
                             </div>

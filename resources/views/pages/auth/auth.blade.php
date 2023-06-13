@@ -9,11 +9,17 @@
         <div class="service-box">
             <div class="btn-left btn-service">
                 <img src="/images/gas/gas-cylinder.png" alt="" width="80">
-                <h1>เปลี่ยนถังแก๊ส</h1>
+                <div class="flex w-full items-center justify-center text-[16px] md:text-[20px] text-center">
+                    <p>เปลี่ยนถังแก๊ส</p>
+
+                </div>
             </div>
-            <div class="btn-right btn-service">
+            <div class="btn-right btn-service p-2">
                 <img src="/images/gas/gas-cylinder2.png" alt="" width="80">
-                <h1>สั่งถังแก๊สหรืออุปกรณ์</h1>
+                <div class="flex w-full items-center justify-center text-[16px] md:text-[20px] text-center">
+                    <p>สั่งถังแก๊สหรืออุปกรณ์</p>
+
+                </div>
 
             </div>
         </div>

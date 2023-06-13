@@ -6,7 +6,14 @@ module.exports = {
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            display: ['group-focus']
+        },
+    },
+    variants: {
+        extends: {
+            display: ['group-focus']
+        },
     },
     plugins: [],
 };

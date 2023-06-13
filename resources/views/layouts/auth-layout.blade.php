@@ -71,9 +71,19 @@
                                 class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 aria-current="page">หน้าหลัก</a>
                         </li>
-                        <li>
+                        <li class="relative">
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">บริการ</a>
+                                class="services group py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ">บริการ</a>
+                            <div class="service-dropdown absolute hidden group-focus:block top-[30px] left-[-2px] min-w-[120px] min-h-[75px] bg-gray-600 shadow-md mt-1 rounded text-white">
+                                <ul class="w-full h-[75px] flex flex-col">
+                                    <a class="flex items-center justify-center w-full h-1/2 text-center bg-inherit hover:bg-gray-700" href="/tankchange">
+                                        <li>เปลี่ยนถัง</li>
+                                    </a>
+                                    <a class="flex items-center justify-center w-full h-1/2 text-center bg-inherit hover:bg-gray-700" href="/tankchange">
+                                        <li>สั่งสินค้า</li>
+                                    </a>
+                                </ul>
+                            </div>
                         </li>
                         <li>
                             <a href="#"
@@ -84,7 +94,7 @@
                                 class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">ติดต่อเรา</a>
                         </li>
                         <li>
-                            <a href="/searchorder"
+                            <a href="javascript:" onclick="searchOrder()"
                                 class="flex gap-[3px] py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"><img
                                     src="/images/icons/search.png" alt=""
                                     style="max-width: 25px;">คำสั่งซื้อ</a>
@@ -112,6 +122,20 @@
         const langBtn = document.querySelector('.lang-button')
         const langMenuBtn = document.querySelector('.menu-language-button')
         const notify = document.querySelector('.btn-cart').getAttribute('cart-notify')
+        const servicesEl = document.querySelector('.services')
+        const service_dropdown = document.querySelector('.service-dropdown')
+        const phone_number = localStorage.getItem('phone_number');
+
+        servicesEl.addEventListener('click', () => {
+            setTimeout(() => {
+                service_dropdown.classList.remove("hidden")
+            }, 200)
+        })
+        servicesEl.addEventListener('blur', () => {
+            setTimeout(() => {
+                service_dropdown.classList.add("hidden")
+            }, 200)
+        })
 
         langBtn.addEventListener('click', function() {
             const langDropdown = document.querySelector('.lang-dropdown')
@@ -135,6 +159,11 @@
         function goToCart() {
             if (window.location.pathname === "/cart" || parseInt(notify) <= 0) return false;
             window.location.href = "/cart";
+        }
+
+        function searchOrder() {
+            const phone = phone_number ? phone_number : "";
+            window.location.href = `searchorder?phone=${phone}`;
         }
     </script>
     @yield('scripts')
