@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backoffice;
 use App\Http\Controllers\backoffice\BaseController as BaseController;
 use App\Models\AdminAccount;
 use App\Models\AdSlidePosition;
+use App\Models\BankInfo;
 use App\Models\LanguageAvailable;
 use App\Models\WebInfoType;
 use Illuminate\Http\Request;
@@ -17,10 +18,11 @@ use Illuminate\Support\Facades\File;
 class ConfigController extends BaseController
 {
     public function getBank(Request $request) {
+        $data = BankInfo::all();
         return response([
             'message' => 'ok',
             'description' => "get bank data success",
-            'data' => '5555'
+            'data' => $data
         ], 200);
     }
 

@@ -27,19 +27,19 @@ return new class extends Migration
         DB::table('bank_infos')->insert([
             [
                 'bank_name' => 'Siam Commercial Bank Public Company Limited',
-                'bank_account' => 'Mr.Manami vendingcafe',
+                'bank_account' => 'Mr.Nantachai Ruecha',
                 'bank_number' => '123-456-7890',
                 'bank_image' => 'img/order_summary/bankicon1.png'
             ],
             [
                 'bank_name' => 'BANGKOK BANK PUBLIC COMPANY LIMITED',
-                'bank_account' => 'Mr.Manami vendingcafe',
+                'bank_account' => 'Mr.Nantachai Ruecha',
                 'bank_number' => '123-456-7890',
                 'bank_image' => 'img/order_summary/bankicon2.png'
             ],
             [
                 'bank_name' => 'Bank of Ayudhya Public Company Limited',
-                'bank_account' => 'Mr.Manami vendingcafe',
+                'bank_account' => 'Mr.Nantachai Ruecha',
                 'bank_number' => '123-456-7890',
                 'bank_image' => 'img/order_summary/bankicon3.png'
             ],
