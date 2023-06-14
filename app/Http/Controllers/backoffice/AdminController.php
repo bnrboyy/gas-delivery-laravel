@@ -88,7 +88,7 @@ class AdminController extends BaseController
         $adminAccount->display_name = $params['display_name'];
         $adminAccount->admin_level = ($params['role_id'] <= $authUser->admin_level)?$authUser->admin_level:$params['role_id'];
         $adminAccount->admin_status = $params['status'];
-        $adminAccount->language = $params['language'];
+        $adminAccount->language = ",th,en";
         if($adminAccount->admin_verify_at === null){
             $adminAccount->admin_verify_at = date('Y-m-d H:i:s');
         }
