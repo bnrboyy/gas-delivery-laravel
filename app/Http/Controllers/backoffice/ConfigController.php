@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\File;
 
 class ConfigController extends BaseController
 {
+    public function getBank(Request $request) {
+        return response([
+            'message' => 'ok',
+            'description' => "get bank data success",
+            'data' => '5555'
+        ], 200);
+    }
+
     public function index(Request $request)
     {
         $this->getAuthUser(1);
@@ -156,7 +164,7 @@ class ConfigController extends BaseController
             return $this->sendErrorValidators('Invalid params', $validator->errors());
         }
 
-        /* &#1072;&#1105;–&#1072;&#8470;‰&#1072;&#1105;&#1030;&#1072;&#8470;&#1026;&#1072;&#1105;›&#1072;&#8470;‡&#1072;&#1105;™ main &#1072;&#1105; &#1072;&#1105;&#1030;&#1072;&#1105;©&#1072;&#1105;&#1030;&#1072;&#1105;«&#1072;&#1105;&#1168;&#1072;&#1105;±&#1072;&#1105;&#1027;&#1072;&#8470;&#1107;&#1072;&#1105;«&#1072;&#8470;‰ set &#1072;&#8470;&#1026;&#1072;&#1105;›&#1072;&#8470;‡&#1072;&#1105;™ default */
+        /* &#1072;&#1105;ï¿½&#1072;&#8470;ï¿½&#1072;&#1105;&#1030;&#1072;&#8470;&#1026;&#1072;&#1105;ï¿½&#1072;&#8470;ï¿½&#1072;&#1105;ï¿½ main &#1072;&#1105;ï¿½&#1072;&#1105;&#1030;&#1072;&#1105;ï¿½&#1072;&#1105;&#1030;&#1072;&#1105;ï¿½&#1072;&#1105;&#1168;&#1072;&#1105;ï¿½&#1072;&#1105;&#1027;&#1072;&#8470;&#1107;&#1072;&#1105;ï¿½&#1072;&#8470;ï¿½ set &#1072;&#8470;&#1026;&#1072;&#1105;ï¿½&#1072;&#8470;ï¿½&#1072;&#1105;ï¿½ default */
         $defaultLang = LanguageAvailable::orderBy('defaults', 'desc')->get()->first();
         $defaultValue = ($defaultLang->abbv_name === $params['language']) ? 1 : 0;
 

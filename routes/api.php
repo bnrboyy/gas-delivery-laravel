@@ -52,7 +52,7 @@ Route::prefix('backoffice/v1')->group(function () {
         Route::post('order/send', [OrderController::class, 'sendOrder']);
         Route::patch('order/payment/verified/{orders_number}', [OrderController::class, 'verifiedPayment']);
         Route::put('order/item/verified', [OrderController::class, 'verifiedOrderWashItem']);
-  
+
 
         /* Member */
         Route::get('member', [MemberController::class, 'getMember']);
@@ -117,6 +117,8 @@ Route::prefix('backoffice/v1')->group(function () {
         Route::post('config/ad_type/create', [ConfigController::class, 'createAdType']);
         Route::patch('config/ad_type/edit', [ConfigController::class, 'editAdType']);
         Route::delete('config/ad_type/token/{token}', [ConfigController::class, 'deleteConfigAdType']);
+
+        Route::get('bank/data', [ConfigController::class, 'getBank']);
 
         Route::post('config/upload/manual', [ConfigController::class, 'uploadManual']);
 
