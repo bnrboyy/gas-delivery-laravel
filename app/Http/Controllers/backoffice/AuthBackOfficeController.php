@@ -45,7 +45,8 @@ class AuthBackOfficeController extends BaseController
             AdminAccount::create([
                 'account_id' => (int)$userCreated->id,
                 'display_name' => $params['display_name'],
-                'admin_level' => 4,
+                'language' => ',th,en',
+                'admin_level' => 2,
                 'admin_status' => 2
             ], Response::HTTP_CREATED);
 
