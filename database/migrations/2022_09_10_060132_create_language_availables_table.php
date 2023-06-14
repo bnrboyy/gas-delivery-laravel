@@ -32,13 +32,13 @@ return new class extends Migration
                 'name' => 'Thai',
                 "defaults" => 1,
             ],
-            [
-                'id' => 2,
-                'abbv_name' => 'en',
-                'flag' => '/images/lang/en.png',
-                'name' => 'English',
-                "defaults" => 0,
-            ],
+            // [
+            //     'id' => 2,
+            //     'abbv_name' => 'en',
+            //     'flag' => '/images/lang/en.png',
+            //     'name' => 'English',
+            //     "defaults" => 0,
+            // ],
         ]);
     }
 
