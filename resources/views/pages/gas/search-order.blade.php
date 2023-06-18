@@ -71,9 +71,9 @@
                             <div class="flex flex-col w-full h-[60px]">
                                 <div class="flex gap-2 w-full items-center">
                                     <img src="images/icons/time-left.png" alt="" width="30">
-                                    <p class="text-gray-500 text-[16px]">เวลาจัดส่ง:</p>
+                                    <p class="text-gray-500 text-[16px]">ระยะเวลาจัดส่ง:</p>
                                 </div>
-                                <p class="text-[18px]">11:45 น.</p>
+                                <p class="text-[18px]">20 - 40 นาที โดยประมาณ</p>
                             </div>
                             <div class="flex flex-col w-full h-[60px] overflow-auto">
                                 <div class="flex gap-2 w-full items-center">

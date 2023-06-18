@@ -44,7 +44,9 @@ Route::prefix('backoffice/v1')->group(function () {
         Route::post('item/{id}', [OrderItemController::class, 'addItem']);
 
         /* Order */
+        Route::get('order/data/pending', [OrderController::class, 'getOrderPending']);
         Route::delete('order/{orders_number}', [OrderController::class, 'deleteOrder']);
+        Route::get('order/cancel/{orders_number}', [OrderController::class, 'onCancelOrder']);
         Route::get('order/data', [OrderController::class, 'getOrder']);
         Route::get('order/data/ordernum', [OrderController::class, 'getOrderByOrderNumber']);
         Route::patch('order/status', [OrderController::class, 'updateOrderStatus']);

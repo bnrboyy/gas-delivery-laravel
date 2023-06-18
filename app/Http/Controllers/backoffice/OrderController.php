@@ -22,17 +22,14 @@ class OrderController extends Controller
             $data = Order::select(
                 'orders.*',
                 'order_statuses.name as status_name',
-                'member_accounts.member_name',
-                'branch_infos.name as branch_name',
                 'order_payments.type as type_payment',
                 'order_payments.slip_image',
                 'order_payments.verified as payment_verified'
             )
                 ->join('order_statuses', 'orders.status_id', 'order_statuses.id')
-                ->join('member_accounts', 'orders.member_id', 'member_accounts.id')
                 ->join('order_payments', 'orders.orders_number', 'order_payments.orders_number')
-                ->join('branch_infos', 'orders.branch_id', 'branch_infos.id')
                 ->where('orders.orders_number', 'like', '%' . $search . '%')
+                ->where('status_id', '!=', 1)
                 ->orderBy('orders.created_at', 'DESC')
                 ->get();
 
@@ -280,7 +277,7 @@ class OrderController extends Controller
 
         try {
             $orders = Order::where(['orders_number' => $request->orders_number])->first();
-            if(!$orders){
+            if (!$orders) {
                 return response([
                     'message' => 'error',
                     'description' => 'Order not found.'
@@ -315,6 +312,52 @@ class OrderController extends Controller
                 'message' => 'ok',
                 'description' => 'update order item verified success',
             ], 200);
+        } catch (Exception $e) {
+            return response([
+                'message' => 'error',
+                'errorMessage' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getOrderPending(Request $request)
+    {
+        try {
+            $orderPending = Order::where(['status_id' => 2])->get();
+
+            return response([
+                'message' => 'ok',
+                'description' => 'get order pending success',
+                'data' => count($orderPending),
+            ], 200);
+
+        } catch (Exception $e) {
+            return response([
+                'message' => 'error',
+                'errorMessage' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function onCancelOrder(Request $request) {
+        try {
+            $order = Order::where(['orders_number' => $request->orders_number])->first();
+
+            if (!$order) {
+                return response([
+                    'message' => 'error',
+                    'description' => 'Order not found!',
+                ], 404);
+            }
+
+            $order->status_id = 5;
+            $order->save();
+
+            return response([
+                'message' => 'ok',
+                'description' => 'Cancel order success',
+            ], 200);
+
         } catch (Exception $e) {
             return response([
                 'message' => 'error',

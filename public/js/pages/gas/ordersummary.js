@@ -12,6 +12,19 @@ const radio_tranfer = document.getElementById("radio-tranfer");
 const upload_slip = document.querySelector(".upload-slip");
 const bank_id = document.getElementById("bank-id");
 
+// var date = new Date().toISOString().slice(0, 10);
+// var timeNow = new Date().toLocaleTimeString().slice(0, 7);
+// var dateTime = date + " " + timeNow;
+
+var now2 = new Date();
+var year = now2.getFullYear();
+var month = (now2.getMonth() + 1).toString().padStart(2, "0");
+var day = now2.getDate().toString().padStart(2, "0");
+var hour = now2.getHours().toString().padStart(2, "0");
+var minute = now2.getMinutes().toString().padStart(2, "0");
+var datetime2 = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
+
+
 const total_price_product = document
     .querySelector(".total-price-product")
     .getAttribute("total-price-product");
@@ -144,6 +157,7 @@ async function saveOrder(_orders) {
     formData.append("distance", (distance / 1000).toFixed(2));
     formData.append("total_price", total_price_product);
     formData.append("delivery_price", shipping_fee);
+    formData.append("transaction_date", datetime2);
 
     if (_orders.payment_type === "transfer") {
         formData.append("slip_image[]", _orders.slip_image[0]);

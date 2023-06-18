@@ -26,31 +26,31 @@ return new class extends Migration
         DB::table('order_statuses')->insert([
             [
                 'id' => 1,
-                'name' => 'waitconfirm',
+                'name' => 'รอยืนยัน',
                 'language' => 'th',
                 'display' => true,
             ],
             [
                 'id' => 2,
-                'name' => 'pending',
+                'name' => 'รอดำเนินการ',
                 'language' => 'th',
                 'display' => true,
             ],
             [
                 'id' => 3,
-                'name' => 'inprogress',
+                'name' => 'กำลังดำเนินการ',
                 'language' => 'th',
                 'display' => true,
             ],
             [
                 'id' => 4,
-                'name' => 'complete',
+                'name' => 'จัดส่งสำเร็จ',
                 'language' => 'th',
                 'display' => true,
             ],
             [
                 'id' => 5,
-                'name' => 'failed',
+                'name' => 'จัดส่งไม่สำเร็จ',
                 'language' => 'th',
                 'display' => true,
             ],

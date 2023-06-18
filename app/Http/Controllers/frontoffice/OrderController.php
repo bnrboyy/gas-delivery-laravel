@@ -207,7 +207,7 @@ class OrderController extends Controller
             $newOrder->customer_name = $request->customer_name;
             $newOrder->phone_number = $request->phone_number;
             $newOrder->second_phone_number = $request->second_phone_number ? $request->second_phone_number : $request->phone_number;
-            $newOrder->transaction_date = $orderTemp->transaction_date;
+            $newOrder->transaction_date = $request->transaction_date;
             $newOrder->delivery_price = (int)$request->delivery_price;
             $newOrder->distance = $request->distance;
             $newOrder->total_price = (int)$request->total_price;
