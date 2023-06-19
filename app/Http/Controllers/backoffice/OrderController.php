@@ -30,7 +30,7 @@ class OrderController extends Controller
                 ->join('order_payments', 'orders.orders_number', 'order_payments.orders_number')
                 ->where('orders.orders_number', 'like', '%' . $search . '%')
                 ->where('status_id', '!=', 1)
-                ->orderBy('orders.created_at', 'DESC')
+                ->orderBy('orders.updated_at', 'DESC')
                 ->get();
 
             return response([
@@ -52,17 +52,15 @@ class OrderController extends Controller
             $order = Order::select(
                 'orders.*',
                 'order_statuses.name as status_name',
-                'member_accounts.member_name',
-                'branch_infos.name as branch_name',
+                // 'member_accounts.member_name',
                 'order_payments.type as type_payment',
                 'order_payments.slip_image',
                 'order_payments.verified as payment_verified'
             )
                 ->join('order_statuses', 'orders.status_id', 'order_statuses.id')
                 ->join('order_payments', 'orders.orders_number', 'order_payments.orders_number')
-                ->join('member_accounts', 'orders.member_id', 'member_accounts.id')
-                ->join('branch_infos', 'orders.branch_id', 'branch_infos.id')
-                ->where(['orders.orders_number' => $request->orders_number, 'orders.type_order' => $request->type])
+                // ->join('member_accounts', 'orders.member_id', 'member_accounts.id')
+                ->where(['orders.orders_number' => $request->orders_number])
                 ->first();
             if (!$order) {
                 return response([
@@ -71,28 +69,21 @@ class OrderController extends Controller
                     'description' => 'Order not found.'
                 ], 404);
             }
-            $data = array();
+
+            $orderItemList = DB::table('order_items')
+                ->select('order_items.*', 'products.title', 'products.cate_id', 'products.details', 'products.more_details', 'products.price', 'products.display', 'products.thumbnail_link')
+                ->where('order_items.orders_number', '=', $request->orders_number)
+                ->leftjoin('products', 'order_items.product_id', '=', 'products.id')
+                ->orderBy('order_items.id', 'desc')
+                ->get();
+
+
             $totalPrice = 0;
-            if ($request->type == 'washing') {
-                $order_items = $this->getOrderWashItemAdmin($request->orders_number);
-                foreach ($order_items as $key => $value) {
-                    $more_price = 0;
-                    if ($value->round_minutes > 0) {
-                        $more_price = (($value->minutes_add / $value->round_minutes) * $value->price_per_minutes);
-                    }
-                    $value->totalPrice = $value->totalPrice + $more_price;
-                    $totalPrice += $value->totalPrice;
-                    $value->title = str_replace(",", ", ", $value->title);
-                    array_push($data, $value);
-                }
-            } else if ($request->type == 'foods') {
-                $order_items = $this->getOrderFoodsItemAdmin($request->orders_number);
-                foreach ($order_items as $key => $value) {
-                    $totalPrice += (int)$value->price * (int)$value->quantity;
-                    array_push($data, $value);
-                }
+            foreach ($orderItemList as $key => $value) {
+                $totalPrice += ($value->price * $value->quantity);
             }
-            $order->orderList = $data;
+
+            $order->orderItemList = $orderItemList;
             $order->totalPrice = $totalPrice;
 
             return response([
@@ -330,7 +321,6 @@ class OrderController extends Controller
                 'description' => 'get order pending success',
                 'data' => count($orderPending),
             ], 200);
-
         } catch (Exception $e) {
             return response([
                 'message' => 'error',
@@ -339,7 +329,8 @@ class OrderController extends Controller
         }
     }
 
-    public function onCancelOrder(Request $request) {
+    public function onCancelOrder(Request $request)
+    {
         try {
             $order = Order::where(['orders_number' => $request->orders_number])->first();
 
@@ -357,7 +348,52 @@ class OrderController extends Controller
                 'message' => 'ok',
                 'description' => 'Cancel order success',
             ], 200);
+        } catch (Exception $e) {
+            return response([
+                'message' => 'error',
+                'errorMessage' => $e->getMessage(),
+            ], 500);
+        }
+    }
 
+    public function updateProductList(Request $request)
+    {
+        try {
+            $params = $request->quantity;
+            $item_id = $request->id;
+
+            $order = Order::where(['orders_number' => $request->orders_number])->first();
+            $orderItem = OrderItem::where(['id' => $item_id])->first();
+            $price_change = false;
+            if ($orderItem->quantity !== $params) $price_change = true;
+
+            DB::table('order_items')
+                ->where('id', $item_id)  // find your user by their email
+                ->limit(1)  // optional - to ensure only one record is updated.
+                ->update(array('quantity' => $params));  // update the record in the DB.
+
+            $orderItemList = DB::table('order_items')
+                ->select('order_items.*', 'products.title', 'products.cate_id', 'products.details', 'products.more_details', 'products.price', 'products.display', 'products.thumbnail_link')
+                ->where('order_items.orders_number', '=', $request->orders_number)
+                ->leftjoin('products', 'order_items.product_id', '=', 'products.id')
+                ->orderBy('order_items.id', 'desc')
+                ->get();
+
+            $totalPrice = 0;
+            foreach ($orderItemList as $key => $value) {
+                $totalPrice += ($value->price * $value->quantity);
+            }
+
+            DB::table('orders')
+                ->where('orders_number', $request->orders_number)  // find your user by their email
+                ->limit(1)  // optional - to ensure only one record is updated.
+                ->update(array('total_price' => $totalPrice));  // update the record in the DB.
+
+
+            return response([
+                'message' => [$order, $orderItem],
+                'description' => 'Product item has been updated!'
+            ], 201);
         } catch (Exception $e) {
             return response([
                 'message' => 'error',

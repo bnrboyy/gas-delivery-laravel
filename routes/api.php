@@ -54,6 +54,7 @@ Route::prefix('backoffice/v1')->group(function () {
         Route::post('order/send', [OrderController::class, 'sendOrder']);
         Route::patch('order/payment/verified/{orders_number}', [OrderController::class, 'verifiedPayment']);
         Route::put('order/item/verified', [OrderController::class, 'verifiedOrderWashItem']);
+        Route::post('order/product/update/{id}', [OrderController::class, 'updateProductList']);
 
 
         /* Member */

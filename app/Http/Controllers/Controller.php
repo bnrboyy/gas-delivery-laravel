@@ -7,8 +7,10 @@ use App\Models\Category;
 use App\Models\LanguageAvailable;
 use App\Models\LanguageConfig;
 use App\Models\MemberAccount;
+use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\WebInfo;
+use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -562,6 +564,42 @@ class Controller extends BaseController
         return $language;
     }
 
-    /* Gas delibery */
 
+
+
+    /* Gas delibery api */
+    public function getOrderByOrderNum($orders_number)
+    {
+        try {
+            $order = Order::select(
+                'orders.*',
+                'order_statuses.name as status_name',
+                'order_payments.type as type_payment',
+                'order_payments.slip_image',
+                'order_payments.verified as payment_verified'
+            )
+                ->join('order_statuses', 'orders.status_id', 'order_statuses.id')
+                ->join('order_payments', 'orders.orders_number', 'order_payments.orders_number')
+                ->where(['orders.orders_number' => $orders_number])
+                ->first();
+            if (!$order) {
+                return response([
+                    'message' => 'error',
+                    'status' => false,
+                    'description' => 'Order not found.'
+                ], 404);
+            }
+            $data = array();
+            $totalPrice = 0;
+
+            $order->orderList = $data;
+            $order->totalPrice = $totalPrice;
+            return $order;
+        } catch (Exception $e) {
+            return response([
+                'message' => 'error',
+                'errorMessage' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
