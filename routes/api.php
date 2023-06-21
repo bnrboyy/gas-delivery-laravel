@@ -84,6 +84,7 @@ Route::prefix('backoffice/v1')->group(function () {
         Route::post('webinfo/token/{token}', [WebInfoController::class, 'addWebInfo']);
         Route::patch('webinfo/token/{token}', [WebInfoController::class, 'editWebInfo']);
         Route::patch('webinfo/display/toggle', [WebInfoController::class, 'toggleDisplayByToken']);
+        Route::patch('webinfo/update/{id}', [WebInfoController::class, 'updateWebinfo']);
         Route::delete('webinfo/{language}/{token}', [WebInfoController::class, 'deleteWebInfoByInfoId']);
 
         /* Category Page */

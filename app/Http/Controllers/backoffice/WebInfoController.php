@@ -20,21 +20,21 @@ class WebInfoController extends BaseController
     public function index(Request $request) {
         $infoList = [];
         $infoDetail = [];
-        $webInfos = $this->webInfoList($request->language); 
-        $infoTypeArr =  $this->webInfoType($request->language); 
+        $webInfos = $this->webInfoList($request->language);
+        $infoTypeArr =  $this->webInfoType($request->language);
         $adminLevel = AdminAccount::where('account_id', Auth::user()->id)->get()->first();
- 
+
         try {
-    
-            foreach( $webInfos as $val) {  
-                $infoTypeId = (int)$val->infoTypeId;  
+
+            foreach( $webInfos as $val) {
+                $infoTypeId = (int)$val->infoTypeId;
                 if($adminLevel->admin_level > $val->admin_level) {
                     continue;
                 }
                 if($infoTypeId === 1) {
                     array_push($infoDetail, $val);
                 }
-                 
+
                 array_push($infoList, [
                     "id" => $val->id,
                     "token" => base64_encode($val->id),
@@ -53,15 +53,15 @@ class WebInfoController extends BaseController
                     "isDetail" => ($infoTypeId === 1),
                 ]);
             }
-         
+
             $webSiteLanguages = LanguageAvailable::select('abbv_name','name')->orderBy('defaults', 'DESC')->get()->all();
             $setDetails = $this->infoSetting($infoDetail);
 
             return response()->json([
                 'data' => [
                     'details' => $setDetails->detail,
-                    'languages' => $webSiteLanguages, 
-                    'info' => $infoList,  
+                    'languages' => $webSiteLanguages,
+                    'info' => $infoList,
                     'infoType' => $infoTypeArr
                 ]
             ]);
@@ -104,7 +104,7 @@ class WebInfoController extends BaseController
         $img['image_2'] = (isset($files['image_2']))? $this->uploadImage($newFolder, $files['image_2'],"2",0):"";
         $img['image_3'] = (isset($files['image_3']))? $this->uploadImage($newFolder, $files['image_3'],"3",0):"";
         $img['image_4'] = (isset($files['image_4']))? $this->uploadImage($newFolder, $files['image_4'],"4",0):"";
-        $img['favicon'] = (isset($files['favicon']))? $this->uploadImage($newFolder, $files['favicon'],"5",0):""; 
+        $img['favicon'] = (isset($files['favicon']))? $this->uploadImage($newFolder, $files['favicon'],"5",0):"";
 
         /* Set SQL Updates */
         $infoLink = "";
@@ -113,11 +113,11 @@ class WebInfoController extends BaseController
             $infoLink .= " WHEN info_param = '{$key}' THEN {$setVal} ";
         }
         $infoLinkSQL = ($infoLink != "")? " , info_link = (case {$infoLink} end) ": "";
-        $sql = "UPDATE web_infos SET info_value = (case 
+        $sql = "UPDATE web_infos SET info_value = (case
                     when info_param = 'webname' then :webname
                     when info_param = 'extraname' then :extraname
                     when info_param = 'companyname' then :companyname
-                end) {$infoLinkSQL} WHERE info_type = 1 AND language =  :lang "; 
+                end) {$infoLinkSQL} WHERE info_type = 1 AND language =  :lang ";
 
         try {
             DB::update($sql, [
@@ -138,26 +138,26 @@ class WebInfoController extends BaseController
                 'description' => "Something went wrong.",
                 'errorsMessage' => $e->getMessage()
             ],501);
-        }   
+        }
     }
 
     public function deleteImage($language, $position) {
-        try {    
+        try {
             $info = WebInfo::where("info_param", $position)->where('language', $language)->get()->first();
-             
+
             if(!$info) {
                 return response([
                     'message' => 'error',
                     'description' => 'Can not find image.'
                 ], 400);
             }
-            
+
             DB::beginTransaction();
             WebInfo::where("info_param", $position)->where('language', $language)->update([
                 "info_link" => "",
                 "updated_at" => date('Y-m-d H:i:s')
             ]);
-         
+
             DB::commit();
 
             return response([
@@ -280,47 +280,15 @@ class WebInfoController extends BaseController
     }
 
     public function addWebInfo(Request $request, $token) {
-        $validator = Validator::make($request->all(),[
-            'token' => 'required|max:50',
-            'param_name' => 'required|max:255',
-            'title' => 'required|string|max:255',
-            'priority' => 'required|integer',
-            'display' => 'required|integer',
-            'language' => 'required|string|max:10',
-            'infoType' => 'required|integer'
-        ]);
 
-        if($validator->fails()){
-            return response([
-                'message' => 'error',
-                'description' => "invalid parameters",
-                'info' => $validator->errors()->first()
-            ],422);
-        }
 
         $params = $request->all();
-        $webInfoCheck = WebInfo::where('info_id', '!=', base64_decode($params['token']))->where('info_param', $params['param_name'])->get()->first();
-        if($webInfoCheck) {
-            return response()->json([
-                'message' => 'error',
-                'description' => 'Duplicate parameter!'
-            ], 409);
-        }
+
         try {
             WebInfo::create([
-                'info_id'=> base64_decode($params['token']),
-                'info_type' => $params['infoType'],
-                'info_param' => $params['param_name'],
                 'info_title' => $params['title'],
                 'info_value' => $params['value'],
-                'info_link' => $params['link'],
-                'info_iframe' => $params['iframe'],
-                'info_attribute' => $params['attribute'],
-                'info_priority' => $params['priority'],
-                'info_display' => ((int)$params['display'] === 1)?1:0,
-                'language' => $params['language'],
                 'admin_level' => 3,
-                'defaults' => 0,
             ], Response::HTTP_CREATED);
 
             return response()->json([
@@ -358,14 +326,14 @@ class WebInfoController extends BaseController
                     'description' => 'Invalid webinfo token.'
                 ], 400);
             }
-            
+
             WebInfo::where('info_id', base64_decode($request->token))->where('language', $request->language)->update([
                 'info_display' => ($updateDisplay->info_display === 1)? 0:1
             ]);
 
             return response()->json([
                 'message' => 'success',
-                'descipriotn'=> 'Display has been changed!', 
+                'descipriotn'=> 'Display has been changed!',
             ], 200);
 
         } catch (Exception $e) {
@@ -377,7 +345,7 @@ class WebInfoController extends BaseController
     }
 
     public function deleteWebInfoByInfoId($language, $token) {
- 
+
         try {
             $id = base64_decode($token);
             $adminLevel = AdminAccount::where('account_id', Auth::user()->id)->get()->first();
@@ -386,7 +354,7 @@ class WebInfoController extends BaseController
                 return response()->json([
                     'message' => 'ok',
                     'description' => 'Web info was not delete!',
-                ], 400);  
+                ], 400);
             }
 
             return response()->json([
@@ -402,7 +370,33 @@ class WebInfoController extends BaseController
                 'description' => 'Something went wrong.',
             ], 501);
         }
-     
+
+    }
+
+    public function updateWebinfo(Request $request) {
+        try {
+
+            $webInfo = WebInfo::where(['info_id' => $request->id])->first()->update([
+                'info_title' => $request->title,
+                'info_value' => $request->value
+            ]);
+
+            return response([
+                'data' => [
+                    'message' => 'ok',
+                    'errorMessage' => 'Update web info success',
+                    'status' => true
+                ]
+            ], 200);
+
+        }catch(Exception $e) {
+            return response([
+                'data' => [
+                    'message' => 'error',
+                    'errorMessage' => $e->getMessage(),
+                ]
+            ], 500);
+        }
     }
 
 
@@ -410,7 +404,7 @@ class WebInfoController extends BaseController
     private function webInfoList($language) {
         /* custom select by infoTypeId */
         $sql = "SELECT * FROM (
-            SELECT 
+            SELECT
                 i.info_id as id,
                 i.admin_level,
                 i.created_at,
@@ -428,9 +422,9 @@ class WebInfoController extends BaseController
                 i.info_type as infoTypeId,
                 t.type_name as infoTypeName,
                 t.title as infoTypeTitle
-            FROM `web_infos` as i 
-            INNER JOIN web_info_types as t ON i.info_type = t.id  
-            WHERE i.language = :lang OR i.defaults = 1 
+            FROM `web_infos` as i
+            INNER JOIN web_info_types as t ON i.info_type = t.id
+            WHERE i.language = :lang OR i.defaults = 1
             order by i.defaults ASC
         ) as webinfo GROUP BY id ";
         return DB::select($sql, [':lang' => $language]);
@@ -442,4 +436,3 @@ class WebInfoController extends BaseController
     }
 }
 
- 
