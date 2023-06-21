@@ -121,7 +121,21 @@ Route::prefix('backoffice/v1')->group(function () {
         Route::patch('config/ad_type/edit', [ConfigController::class, 'editAdType']);
         Route::delete('config/ad_type/token/{token}', [ConfigController::class, 'deleteConfigAdType']);
 
+        /* Bank */
+
         Route::get('bank/data', [ConfigController::class, 'getBank']);
+        Route::get('get/bank/{id}', [BankController::class, 'getBankById']);
+        Route::post('bank/create', [BankController::class, 'createBank']);
+        Route::post('bank/update/{id}', [BankController::class, 'updateBank']);
+        Route::delete('bank/delete/{id}', [BankController::class, 'deleteBank']);
+        Route::put('bank/update/display/{id}', [BankController::class, 'updateDisplayBank']);
+
+
+
+
+
+
+
 
         Route::post('config/upload/manual', [ConfigController::class, 'uploadManual']);
 

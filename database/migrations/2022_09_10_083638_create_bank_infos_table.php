@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('bank_account');
             $table->string('bank_number');
             $table->string('bank_image');
+            $table->boolean('display');
             $table->timestamps();
         });
 
@@ -29,19 +30,22 @@ return new class extends Migration
                 'bank_name' => 'Siam Commercial Bank Public Company Limited',
                 'bank_account' => 'Mr.Nantachai Ruecha',
                 'bank_number' => '123-456-7890',
-                'bank_image' => 'img/order_summary/bankicon1.png'
+                'bank_image' => 'img/order_summary/bankicon1.png',
+                'display' => 1
             ],
             [
                 'bank_name' => 'BANGKOK BANK PUBLIC COMPANY LIMITED',
                 'bank_account' => 'Mr.Nantachai Ruecha',
                 'bank_number' => '123-456-7890',
-                'bank_image' => 'img/order_summary/bankicon2.png'
+                'bank_image' => 'img/order_summary/bankicon2.png',
+                'display' => 1
             ],
             [
                 'bank_name' => 'Bank of Ayudhya Public Company Limited',
                 'bank_account' => 'Mr.Nantachai Ruecha',
                 'bank_number' => '123-456-7890',
-                'bank_image' => 'img/order_summary/bankicon3.png'
+                'bank_image' => 'img/order_summary/bankicon3.png',
+                'display' => 1
             ],
         ]);
     }
