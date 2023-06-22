@@ -7,15 +7,21 @@
 @section('sections')
     <div class="container">
         <div class="service-box">
-            <div class="btn-left btn-service">
-                <img src="/images/gas/gas-cylinder.png" alt="" width="80">
+            <div class="btn-left btn-service md:min-h-[200px]">
+                <figure class="flex justify-center items-center max-w-[80px]">
+                    <img class="grow w-[60px] md:w-[75px]" src="/images/gas/gas-cylinder.png" alt="">
+
+                </figure>
                 <div class="flex w-full items-center justify-center text-[16px] md:text-[20px] text-center">
                     <p>เปลี่ยนถังแก๊ส</p>
 
                 </div>
             </div>
-            <div class="btn-right btn-service p-2">
-                <img src="/images/gas/gas-cylinder2.png" alt="" width="80">
+            <div class="btn-right btn-service p-2  md:min-h-[200px]">
+                <figure class="flex justify-center items-center max-w-[80px]">
+                    <img class="grow w-[60px] md:w-[75px]" src="/images/gas/gas-cylinder2.png" alt="">
+
+                </figure>
                 <div class="flex w-full items-center justify-center text-[16px] md:text-[20px] text-center">
                     <p>สั่งถังแก๊สหรืออุปกรณ์</p>
 

@@ -16,10 +16,10 @@ class ProductCategoriesController extends BaseController
     public function getProductCategories(Request $req)
     {
         try {
-            $product_cate = DB::select('SELECT * FROM ( 
-                SELECT * FROM product_categories 
+            $product_cate = DB::select('SELECT * FROM (
+                SELECT * FROM product_categories
                 WHERE language = :lang OR defaults = 1
-                ORDER BY defaults ASC 
+                ORDER BY defaults ASC
             ) as product_category GROUP BY id ORDER BY updated_at DESC', [':lang' => $req->language]);
             return response([
                 'message' => 'ok',
@@ -65,8 +65,6 @@ class ProductCategoriesController extends BaseController
             'title' => 'required|string',
             'details' => 'string|nullable',
             'display' => 'required|numeric',
-            'is_food' => 'required|numeric',
-            'language' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -84,13 +82,13 @@ class ProductCategoriesController extends BaseController
             $creating->thumbnail_title = $params['imageTitle'];
             $creating->thumbnail_alt = $params['imageAlt'];
             $creating->display = $params['display'];
-            $creating->is_food = $params['is_food'];
-            $creating->language = $params['language'];
+            $creating->language = 'th';
+            $creating->defaults = 1;
             $creating->save();
 
             return response([
                 'message' => 'ok',
-                'description' => 'created success'
+                'description' => 'created product category success'
             ], 201);
         } catch (Exception $e) {
             return response([
@@ -114,8 +112,6 @@ class ProductCategoriesController extends BaseController
             'title' => 'required|string',
             'details' => 'string|nullable',
             'display' => 'required|numeric',
-            'is_food' => 'required|numeric',
-            'language' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -131,8 +127,7 @@ class ProductCategoriesController extends BaseController
                 'title' => $params['title'],
                 'details' => $params['details'],
                 'display' => $params['display'],
-                'is_food' => $params['is_food'],
-                'language' => $params['language'],
+                'language' => "th",
             ];
 
             if (isset($files['image'])) {
@@ -146,7 +141,7 @@ class ProductCategoriesController extends BaseController
             DB::commit();
             return response([
                 'message' => 'success',
-                'description' => 'Updated successfully'
+                'description' => 'Updated Product category successfully'
             ], 200);
         } catch (Exception $e) {
             DB::rollback();

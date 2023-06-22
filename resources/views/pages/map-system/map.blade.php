@@ -40,6 +40,7 @@
                         <button type="button" id="btn_confirm" onclick="handlerConfirm()"
                             style="display:flex; justify-content:center; align-items:center; margin: 0 auto; background: #0170fa;width: 100%;max-width: 241px;height: 36px;max-height: 36px;color: #fff;border-radius: 18px;">เลือกที่อยู่</button>
                     </div>
+                    <input id="branch_location" type="hidden" name="" value="{{ $branch_location }}">
                 </div>
             </div>
         </div>

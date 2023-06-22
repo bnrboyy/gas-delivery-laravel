@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->integer('cate_id')->default(0);
             $table->text('details')->nullable();
+            $table->text('description')->nullable();
             $table->text('more_details')->nullable();
             $table->integer('price')->default(0);
             $table->integer('page_id')->default(0);

@@ -19,10 +19,10 @@ class ProductsController extends BaseController
             $pageId = $req->input('pageId');
             $language = $req->input('language');
             if ($pageId) {
-                $products = DB::select('SELECT * FROM ( 
-                    SELECT * FROM products 
-                    WHERE (page_id = :pageId AND language = :lang) OR (page_id = :pageIdd AND defaults = 1) 
-                    ORDER BY defaults ASC 
+                $products = DB::select('SELECT * FROM (
+                    SELECT * FROM products
+                    WHERE (page_id = :pageId AND language = :lang) OR (page_id = :pageIdd AND defaults = 1)
+                    ORDER BY defaults ASC
                 ) as product GROUP BY id ORDER BY updated_at DESC', [':pageId' => $pageId, ':pageIdd' => $pageId, ':lang' => $language]);
                 return response([
                     'message' => 'ok',
@@ -30,10 +30,10 @@ class ProductsController extends BaseController
                     'data' => $products
                 ], 200);
             } else {
-                $products = DB::select('SELECT * FROM ( 
-                    SELECT * FROM products 
+                $products = DB::select('SELECT * FROM (
+                    SELECT * FROM products
                     WHERE language = :lang OR defaults = 1
-                    ORDER BY defaults ASC 
+                    ORDER BY defaults ASC
                 ) as product GROUP BY id ORDER BY updated_at DESC', [':lang' => $language]);
                 return response([
                     'message' => 'ok',
@@ -87,12 +87,7 @@ class ProductsController extends BaseController
             'price' => 'numeric|nullable',
             'details' => 'string|nullable',
             'description' => 'string|nullable',
-            'page_id' => 'numeric',
             'display' => 'required|numeric',
-            'can_wave' => 'required|numeric',
-            'can_sweet' => 'required|numeric',
-            'priority' => 'required|numeric',
-            'language' => 'required|string',
             'cate_id' => 'numeric',
         ]);
 
@@ -101,10 +96,6 @@ class ProductsController extends BaseController
         }
 
         try {
-
-            /* Update Priority */
-            $priority = $params['priority'];
-            $this->priorityProductUpdate('priority', $params['language'], $priority);
 
             /*  Upload Image  */
             $newFolder = "upload/" . date('Y') . "/" . date('m') . "/" . date('d') . "/";
@@ -117,17 +108,10 @@ class ProductsController extends BaseController
             $creating->title = $params['title'];
             $creating->details = $params['details'];
             $creating->description = $params['description'];
-            $creating->page_id = $params['page_id'];
             $creating->display = $params['display'];
             $creating->price = $params['price'];
-            $creating->can_wave = $params['can_wave'];
-            $creating->can_sweet = $params['can_sweet'];
-            $creating->priority = $params['priority'];
-            $creating->language = $params['language'];
+            $creating->language = "th";
             $creating->cate_id = $params['cate_id'];
-            $creating->price_per_minutes = $params['price_per_minutes'];
-            $creating->round_minutes = $params['round_minutes'];
-            $creating->default_minutes = $params['default_minutes'];
             $creating->save();
 
             return response([
@@ -157,12 +141,7 @@ class ProductsController extends BaseController
             'title' => 'required|string',
             'price' => 'numeric|nullable',
             'details' => 'string|nullable',
-            'page_id' => 'numeric',
             'display' => 'required|numeric',
-            'can_wave' => 'required|numeric',
-            'can_sweet' => 'required|numeric',
-            'language' => 'required|string',
-            'priority' => 'required|numeric',
             'cate_id' => 'numeric'
         ]);
 
@@ -171,29 +150,18 @@ class ProductsController extends BaseController
         }
 
         try {
-            /* Update Priority */
-            $priority = $params['priority'];
-            $this->priorityProductUpdate('priority', $params['language'], $priority);
-
             DB::beginTransaction();
 
-            $conditions = ['id' => $params['id'], 'language' => $params['language']];
+            $conditions = ['id' => $params['id'] ];
             $values = [
                 'thumbnail_title' => $params['imageTitle'],
                 'thumbnail_alt' => $params['imageAlt'],
                 'title' => $params['title'],
                 'price' => $params['price'],
                 'details' => $params['details'],
-                'page_id' => $params['page_id'],
                 'display' => $params['display'],
-                'can_wave' => $params['can_wave'],
-                'can_sweet' => $params['can_sweet'],
-                'language' => $params['language'],
-                'priority' => $params['priority'],
+                'language' => "th",
                 'cate_id' => $params['cate_id'],
-                'price_per_minutes' => $params['price_per_minutes'],
-                'round_minutes' => $params['round_minutes'],
-                'default_minutes' => $params['default_minutes'],
             ];
 
             if (isset($files['image'])) {
@@ -208,7 +176,7 @@ class ProductsController extends BaseController
             DB::commit();
             return response([
                 'message' => 'success',
-                'description' => 'Updated successfully'
+                'description' => 'Updated Product successfully'
             ], 200);
         } catch (Exception $e) {
             DB::rollBack();

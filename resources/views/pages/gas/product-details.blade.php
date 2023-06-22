@@ -10,7 +10,7 @@
             <div class="details flex w-full items-center p-2 gap-2">
                 <div class="card-item">
                     <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
+                        <img src="/{{ $data->thumbnail_link }}" alt="">
                     </div>
 
                     <div class="box-details-action w-full">
@@ -32,9 +32,12 @@
                     </div>
                 </div>
                 <div class="details-item flex flex-col gap-2">
-                    <div class="box-details w-full">
-                        <p>{{ $data->details }}</p>
-                        <p>{{ $data->details }}</p>
+                    <div class="box-details w-full ">
+                        <p class="text-[18px]">{{ $data->details }}</p>
+                        <div class="w-full break-all">
+                            <p class="">{{ $data->description }}</p>
+
+                        </div>
                     </div>
                     <div class="flex w-full h-[80px]">
                         <input class="w-full" type="text" placeholder="รายละเอียดเพิ่มเติม">

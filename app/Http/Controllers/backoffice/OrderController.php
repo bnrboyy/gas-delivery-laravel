@@ -227,6 +227,48 @@ class OrderController extends Controller
         }
     }
 
+    public function deleteOrderItem(Request $request)
+    {
+        try {
+            $order = Order::where(['orders_number' => $request->orders_number])->first();
+            if (!$order) {
+                return response([
+                    'message' => 'error',
+                    'status' => false,
+                    'description' => 'Order not found.'
+                ], 404);
+            }
+            OrderItem::where(['orders_number' => $request->orders_number, 'id' => $request->id])->first()->delete();
+
+            $orderItemList = DB::table('order_items')
+                ->select('order_items.*', 'products.title', 'products.cate_id', 'products.details', 'products.more_details', 'products.price', 'products.display', 'products.thumbnail_link')
+                ->where('order_items.orders_number', '=', $request->orders_number)
+                ->leftjoin('products', 'order_items.product_id', '=', 'products.id')
+                ->orderBy('order_items.id', 'desc')
+                ->get();
+
+            $totalPrice = 0;
+            foreach ($orderItemList as $key => $value) {
+                $totalPrice += ($value->price * $value->quantity);
+            }
+
+            DB::table('orders')
+                ->where('orders_number', $request->orders_number)  // find your user by their email
+                ->limit(1)  // optional - to ensure only one record is updated.
+                ->update(array('total_price' => $totalPrice));  // update the record in the DB.
+
+            return response([
+                'message' => 'ok',
+                'description' => 'delete order item success',
+            ], 200);
+        } catch (Exception $e) {
+            return response([
+                'message' => 'error',
+                'errorMessage' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     public function verifiedPayment(Request $request)
     {
         try {

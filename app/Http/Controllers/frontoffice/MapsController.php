@@ -17,6 +17,7 @@ class MapsController extends Controller
         $webInfo = $this->infoSetting($infos);
         return view('pages.map-system.map', [
             'maximum_radius' => $webInfo->settings->maximum_radius->value,
+            'branch_location' => $webInfo->settings->branch_location->value,
             'cart_notify' => count($orderItem),
         ]);
     }

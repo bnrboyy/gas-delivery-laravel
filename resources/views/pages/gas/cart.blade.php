@@ -26,7 +26,7 @@
                     @foreach ($order_items as $item)
                         <div class="item-details w-full flex p-2 gap-2">
                             <figure class="h-full flex justify-center items-center">
-                                <img src="/images/gas/gas-cylinder.png" alt="">
+                                <img src="/{{ $item->thumbnail_link }}" alt="">
                             </figure>
                             <div class="details h-full flex">
                                 <div class="box-details flex flex-col justify-between w-[85%]">

@@ -125,7 +125,7 @@
                                 <div class="w-full border-b border-gray-400">
                                     <div class="flex w-full h-[90px] sm:h-[120px]">
                                         <figure class="flex h-full justify-center items-center w-[20%]">
-                                            <img src="/images/gas/gas-cylinder.png" alt="" style="max-width: 70px">
+                                            <img src="/{{ $item->thumbnail_link }}" alt="" style="max-width: 70px">
                                         </figure>
                                         <div class="flex flex-col w-[80%] h-full">
                                             <p class="w-full text-gray-500">เปลี่ยนถัง</p>
@@ -158,7 +158,8 @@
                             </div> --}}
                         </div>
                         <div class="flex flex-col w-full h-[65px] sm:h-[80px] p-2">
-                            <div class="total-price-product flex justify-between w-full text-[14px] sm:text-[18px]" total-price-product="{{ $total_price }}">
+                            <div class="total-price-product flex justify-between w-full text-[14px] sm:text-[18px]"
+                                total-price-product="{{ $total_price }}">
                                 <p>ราคาสินค้า</p>
                                 <p>{{ $total_price }} บาท</p>
                             </div>

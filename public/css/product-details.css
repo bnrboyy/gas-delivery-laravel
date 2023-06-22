@@ -157,6 +157,12 @@ main .container .product-details .details .details-item .box-details-action .btn
 
     main .container .product-details .details .details-item {
         width: 100% !important;
+
+    }
+
+    main .container .product-details .details .details-item .box-details {
+        /* overflow-wrap: break-word !important; */
+
     }
 
     main .container .product-details .details .details-item .box-details-action {
