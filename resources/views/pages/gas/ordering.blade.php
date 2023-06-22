@@ -7,10 +7,15 @@
 
 @section('sections')
     <div class="container">
-        <div class="header flex items-center gap-4">
+        <div class="header flex items-center justify-between">
             <div class="title flex items-center gap-2">
                 <img src="/images/gas/product-list-icon.png" alt="" width="100">
-                <h1>รายการทั้งหมด : เปลี่ยนถังแก๊ส</h1>
+                <h1>รายการทั้งหมด : สั่งสินค้า</h1>
+            </div>
+            <div class="flex h-full items-center w-[350px] gap-4">
+                <div class="h-full w-1/3 rounded" style="box-shadow: -5px -5px 20px #dcd3d3, 5px 5px 10px #a09e9e;"></div>
+                <div class="h-full w-1/3 rounded" style="box-shadow: -5px -5px 20px #dcd3d3, 5px 5px 10px #a09e9e;"></div>
+                <div class="h-full w-1/3 rounded" style="box-shadow: -5px -5px 20px #dcd3d3, 5px 5px 10px #a09e9e;"></div>
             </div>
         </div>
         <div class="content flex w-full h-full justify-center overflow-y-auto">

@@ -21,6 +21,7 @@ Route::get('/product-details/{product_id}', [GasController::class, 'getProductBy
 Route::get('/cart', [GasController::class, 'cartDetails']);
 Route::get('/ordersummary', [GasController::class, 'orderSummary']);
 Route::get('/searchorder', [GasController::class, 'searchOrder']);
+Route::get('/ordering', [GasController::class, 'orderingContent']);
 
 
 Route::post('/create/ordertemp', [OrderController::class, 'createOrderTemp']);

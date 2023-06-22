@@ -29,9 +29,20 @@ class GasController extends Controller
 
         return view('pages.gas.tankchange', [
             'products' => $products,
-
             'language_available' => $language_available,
             'language_active' => $lang_active,
+            'cart_notify' => count($orderItem),
+        ]);
+    }
+
+    public function orderingContent(Request $request)
+    {
+        $products = Product::where(['cate_id' => 1, 'display' => 1])->get();
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
+
+        return view('pages.gas.ordering', [
+            'products' => $products,
             'cart_notify' => count($orderItem),
         ]);
     }
@@ -150,11 +161,13 @@ class GasController extends Controller
                 $value->order_status = "ไม่สำเร็จ";
             }
 
-            $value->order_items = DB::select("SELECT oi.*, p.title AS product_name , p.thumbnail_link AS product_img FROM order_items AS oi
+            $value->order_items = DB::select(
+                "SELECT oi.*, p.title AS product_name , p.thumbnail_link AS product_img FROM order_items AS oi
                                                 LEFT JOIN products AS p ON p.id = oi.product_id
                                                 WHERE oi.orders_number = :orders_number
-                                                ORDER BY oi.id DESC"
-                                            , ["orders_number" => $value->orders_number]);
+                                                ORDER BY oi.id DESC",
+                ["orders_number" => $value->orders_number]
+            );
         }
 
         return view('pages.gas.search-order', [

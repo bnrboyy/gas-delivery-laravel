@@ -49,7 +49,7 @@
             btn_right.classList.toggle("active")
             setTimeout(() => {
                 btn_right.classList.toggle("active")
-                window.location.href = "/tankchange"
+                window.location.href = "/ordering"
 
             }, 200)
         })
