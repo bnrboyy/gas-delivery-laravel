@@ -37,6 +37,8 @@ const delivery_price = parseInt(
 const price_per_kilo = parseInt(
     document.querySelector(".web-info").getAttribute("price-per-kilo")
 );
+const orderNumber = document.querySelector(".web-info").getAttribute("orders-number");
+
 let distance = 0;
 let radius = 0;
 let shipping_fee = 0;
@@ -183,6 +185,32 @@ async function saveOrder(_orders) {
             text: "Something went wrong!",
         });
     }
+}
+
+function onCancelOrder(_orderNumb) {
+    Swal.fire({
+        text: "คุณต้องการยกเลิกคำสั่งซื้อหรือไม่",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'กลับ'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axios.delete(`order/cancel/${_orderNumb}`)
+                .then(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'ยกเลิกคำสั่งซื้อสำเร็จ',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(() => {
+                        window.location.href = "/";
+                    })
+                }).catch((err) => console.log(err))
+        }
+    })
 }
 
 function initMap() {

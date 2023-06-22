@@ -116,7 +116,6 @@ class GasController extends Controller
         foreach ($orderItemList as $key => $value) {
             $totalPrice += ($value->price * $value->quantity);
         }
-
         return view('pages.gas.order-summary', [
             'order_temp' => $orderTemp,
             'cart_notify' => count($orderItem),

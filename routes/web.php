@@ -25,6 +25,7 @@ Route::get('/searchorder', [GasController::class, 'searchOrder']);
 
 Route::post('/create/ordertemp', [OrderController::class, 'createOrderTemp']);
 Route::delete('/orderitem/delete', [OrderController::class, 'onDeleteOrderItem']);
+Route::delete('/order/cancel/{ordernumber}', [OrderController::class, 'onCancelOrder']);
 Route::get('/cart/item/updatequantity/{id}', [OrderController::class, 'updateQuantity']);
 Route::post('/order/confirmorder', [Ordercontroller::class, 'onConfirmOrder']);
 

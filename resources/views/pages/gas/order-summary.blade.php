@@ -180,15 +180,16 @@
                     </div>
                 </div>
                 <div class="flex w-full h-1/2 justify-center items-center gap-8 mb-2 px-2">
-                    <button class="w-[150px] h-[98%] md:h-full border border-[#e28f21] rounded-md">ยกเลิก</button>
+                    <button onclick="onCancelOrder('{{ $order_temp->orders_number }}')" class="w-[150px] h-[98%] md:h-full border border-[#e28f21] rounded-md">ยกเลิก</button>
                     <button onclick="confirmOrder()"
                         class="w-[150px] h-[98%] md:h-full bg-[#e28f21] shadow-lg shadow-[#000]-500/40 border border-orange-400 rounded-md">ยืนยันคำสั่งซื้อ</button>
                 </div>
+
             </div>
         </div>
     </div>
     <div class="web-info hidden" price-per-kilo="{{ $price_per_kilo }}" delivery-price="{{ $delivery_price }}"
-        maximum-radius="{{ $maximum_radius }}"></div>
+        maximum-radius="{{ $maximum_radius }}" orders-number="{{ $order_temp->orders_number }}"></div>
 @endsection
 
 @section('scripts')

@@ -133,6 +133,30 @@ class OrderController extends Controller
         }
     }
 
+    public function onCancelOrder(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            OrderTemp::where(['orders_number' => $request->ordernumber])->delete();
+            OrderItem::where(['orders_number' => $request->ordernumber])->delete();
+
+            DB::commit();
+            return response([
+                'message' => 'ok',
+                'description' => 'Cancel order success.',
+                'status' => true,
+            ], 200);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response([
+                'message' => 'error',
+                'status' => false,
+                'description' => 'Something went wrong.',
+                'errorMessage' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function updateQuantity(Request $request)
     {
         try {
