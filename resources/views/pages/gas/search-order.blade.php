@@ -97,7 +97,7 @@
                                                 </figure>
                                             </div>
                                             <div class="flex flex-col w-[80%] h-full">
-                                                <p>เปลี่ยนถัง</p>
+                                                <p>[{{$item->product_cate_id == 1 ? "เปลี่ยนถัง" : ($item->product_cate_id == 2 ? "ถังแก๊สใหม่" : "อุปกรณ์")}}]</p>
                                                 <div class="flex w-full justify-between">
                                                     <p>{{$item->product_name}}</p>
                                                     <p>X{{$item->quantity}}</p>
@@ -118,39 +118,6 @@
                         </div>
                     </div>
                 @endforeach
-
-                {{-- <div class="flex justify-center items-center min-h-[500px] md:w-1/2 p-4">
-                    <div class="flex flex-col gap-2 w-full max-w-[450px] h-full p-4 rounded-xl" style="box-shadow: 5px 5px 10px #b4c1d5;">
-                        <div class="flex flex-col w-full h-[60px] border border-red-500">
-                            <p class="text-gray-500 text-[16px]">วันที่ทำรายการ</p>
-                            <p class="text-[18px]">02-06-2023</p>
-                        </div>
-                        <div class="flex flex-col w-full h-[60px] border border-red-500">
-                            <p class="text-gray-500 text-[16px]">สถานะ</p>
-                            <p class="text-[18px]">กำลังดำเนินการ</p>
-                        </div>
-                        <div class="flex flex-col w-full h-[60px] border border-red-500">
-                            <p class="text-gray-500 text-[16px]">เลขคำสั่งซื้อ</p>
-                            <p class="text-[18px]">ORD-12345667890</p>
-                        </div>
-                        <div class="flex flex-col w-full h-[60px] border border-red-500">
-                            <p class="text-gray-500 text-[16px]">เวลาจัดส่ง</p>
-                            <p class="text-[18px]">11:45 น.</p>
-                        </div>
-                        <div class="flex flex-col w-full h-[60px] border border-red-500">
-                            <p class="text-gray-500 text-[16px]">สถานที่จัดส่ง</p>
-                            <p class="text-[18px]">บ้านเลขที่ 111/444 เมืองขอนแก่น. . . .</p>
-                        </div>
-                        <div class="flex flex-col w-full h-[200px] border border-red-500">
-
-                        </div>
-                        <div class="flex flex-col w-full h-[60px] border border-red-500">
-                            <p class="text-gray-500 text-[16px]">ราคารวม</p>
-                            <p class="text-[18px]">250 บาท</p>
-                        </div>
-                    </div>
-                </div> --}}
-
             </div>
         </div>
 

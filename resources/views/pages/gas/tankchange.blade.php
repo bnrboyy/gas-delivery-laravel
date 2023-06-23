@@ -7,10 +7,10 @@
 
 @section('sections')
     <div class="container">
-        <div class="header flex items-center gap-4">
+        <div class="header w-full flex items-center gap-4">
             <div class="title flex items-center gap-2">
                 <img src="/images/gas/product-list-icon.png" alt="" width="100">
-                <h1>รายการทั้งหมด : เปลี่ยนถังแก๊ส</h1>
+                <p>รายการทั้งหมด : เปลี่ยนถังแก๊ส</p>
             </div>
         </div>
         <div class="content flex w-full h-full justify-center overflow-y-auto">
@@ -18,7 +18,7 @@
                 @foreach ($products as $product)
                     <div class="card-item" productId="{{ $product->id }}">
                         <div class="content-head">
-                            <img src="{{ $product->thumbnail_link }}" alt="">
+                            <img class="w-full h-full" src="{{ $product->thumbnail_link }}" alt="">
                         </div>
                         <div class="product-details w-full flex flex-col space-y-4">
                             <p class="text-lg">{{ $product->title }}</p>
@@ -27,106 +27,6 @@
                         </div>
                     </div>
                 @endforeach
-
-                {{-- <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div> --}}
             </div>
         </div>
 

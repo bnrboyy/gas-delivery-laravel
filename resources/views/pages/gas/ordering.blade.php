@@ -10,12 +10,20 @@
         <div class="header flex items-center justify-between">
             <div class="title flex items-center gap-2">
                 <img src="/images/gas/product-list-icon.png" alt="" width="100">
-                <h1>รายการทั้งหมด : สั่งสินค้า</h1>
+                <p>สั่งสินค้า : {{$cate_title}}</p>
             </div>
-            <div class="flex h-full items-center w-[350px] gap-4">
-                <div class="h-full w-1/3 rounded" style="box-shadow: -5px -5px 20px #dcd3d3, 5px 5px 10px #a09e9e;"></div>
-                <div class="h-full w-1/3 rounded" style="box-shadow: -5px -5px 20px #dcd3d3, 5px 5px 10px #a09e9e;"></div>
-                <div class="h-full w-1/3 rounded" style="box-shadow: -5px -5px 20px #dcd3d3, 5px 5px 10px #a09e9e;"></div>
+            <div class="relative w-auto h-auto">
+                <button class="btn-cate flex items-center justify-center gap-2 w-[130px] h-[35px] rounded border-2 border-gray-900">ประเภทสินค้า <img class="img-arrow max-w-[20px] duration-300"
+                        src="images/icons/down-arrow.png" alt=""></button>
+
+                <div class="dropdown hidden absolute w-[130px] h-[120px] text-white bg-gray-900 rounded z-10 top-[2.5rem] duration-300" >
+                    <ul class="w-full">
+                        <a class="w-full bg-inherit hover:bg-gray-700" href="/ordering"><li class="p-2">สินค้าทั้งหมด</li></a>
+                        <a class="w-full bg-inherit hover:bg-gray-700" href="/ordering?cateid=2"><li class="p-2">ถังแก๊สใหม่</li></a>
+                        <a class="w-full bg-inherit hover:bg-gray-700" href="/ordering?cateid=3"><li class="p-2">อุปกรณ์</li></a>
+
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="content flex w-full h-full justify-center overflow-y-auto">
@@ -23,7 +31,7 @@
                 @foreach ($products as $product)
                     <div class="card-item" productId="{{ $product->id }}">
                         <div class="content-head">
-                            <img src="{{ $product->thumbnail_link }}" alt="">
+                            <img class="w-full h-full" src="{{ $product->thumbnail_link }}" alt="">
                         </div>
                         <div class="product-details w-full flex flex-col space-y-4">
                             <p class="text-lg">{{ $product->title }}</p>
@@ -32,106 +40,6 @@
                         </div>
                     </div>
                 @endforeach
-
-                {{-- <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="content-head">
-                        <img src="/images/gas/gas-cylinder.png" alt="">
-                    </div>
-                    <div class="product-details w-full flex flex-col space-y-4">
-                        <p class="text-lg">ถัง 18 kg. สีแดง</p>
-                        <span class="text-xl text-sky-500/100">ราคา : 150 บาท</span>
-                    </div>
-                </div> --}}
             </div>
         </div>
 
@@ -141,6 +49,10 @@
 @section('scripts')
     <script>
         const card_items = document.querySelectorAll(".card-item")
+        const btn_cate = document.querySelector(".btn-cate")
+        const dropdown = document.querySelector(".dropdown")
+        const arrow = document.querySelector(".img-arrow")
+
         card_items.forEach((item) => {
             item.addEventListener('click', () => {
                 let id = item.getAttribute('productId')
@@ -151,5 +63,11 @@
                 }, 200);
             })
         })
+
+        btn_cate.addEventListener('click', () => {
+            dropdown.classList.toggle('hidden')
+            arrow.classList.toggle('active')
+        })
+
     </script>
 @endsection

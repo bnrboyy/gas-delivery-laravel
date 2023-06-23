@@ -140,7 +140,7 @@ main .container {
 
 @media screen and (max-width: 585px) {
     main {
-        padding: 2rem 25px;
+        padding: 1rem 10px;
     }
 
     .container .service-box {

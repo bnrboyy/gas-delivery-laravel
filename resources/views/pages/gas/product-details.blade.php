@@ -12,7 +12,6 @@
                     <div class="content-head">
                         <img src="/{{ $data->thumbnail_link }}" alt="">
                     </div>
-
                     <div class="box-details-action w-full">
                         <button class="btn-decrement w-6 h-6">
                             <figure>
@@ -33,7 +32,7 @@
                 </div>
                 <div class="details-item flex flex-col gap-2">
                     <div class="box-details w-full ">
-                        <p class="text-[18px]">{{ $data->details }}</p>
+                        <p class="text-[18px]"><span class="text-gray-500">[{{ $cate_title }}] : </span> {{ $data->details }}</p>
                         <div class="w-full break-all">
                             <p class="">{{ $data->description }}</p>
 

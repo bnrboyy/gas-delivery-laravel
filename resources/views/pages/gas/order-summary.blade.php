@@ -128,7 +128,7 @@
                                             <img src="/{{ $item->thumbnail_link }}" alt="" style="max-width: 70px">
                                         </figure>
                                         <div class="flex flex-col w-[80%] h-full">
-                                            <p class="w-full text-gray-500">เปลี่ยนถัง</p>
+                                            <p class="w-full text-gray-500">[{{$item->cate_id == 1 ? "เปลี่ยนถัง" : ($item->cate_id == 2 ? "ถังแก๊สใหม่" : "อุปกรณ์")}}]</p>
                                             <p class="w-full text-gray-900 text-[16px]">{{ $item->title }}</p>
                                             <div class="flex justify-between">
                                                 <p class="w-full text-gray-900 text-[18px]">ราคา: <span

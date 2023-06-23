@@ -115,7 +115,6 @@ main .container .cart-action button {
     height: 100%;
     max-height: 70px;
     background-color: #e28f21;
-    box-shadow: 1px 1px 10px #e28f21;
 /*  */
     border-radius: 5px;
 }

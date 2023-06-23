@@ -126,7 +126,6 @@ main .container .product-details .details .details-item .box-details-action .btn
     height: 55px;
     border-radius: 5px;
     background-color: #e28f21;
-    box-shadow: 1px 1px 10px #e28f21;
     color: rgb(17 24 39); /* main color */
     font-size: 24px;
 }
@@ -157,12 +156,10 @@ main .container .product-details .details .details-item .box-details-action .btn
 
     main .container .product-details .details .details-item {
         width: 100% !important;
-
     }
 
     main .container .product-details .details .details-item .box-details {
         /* overflow-wrap: break-word !important; */
-
     }
 
     main .container .product-details .details .details-item .box-details-action {

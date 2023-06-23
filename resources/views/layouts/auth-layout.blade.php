@@ -8,12 +8,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/spiner.css" />
     @yield('style')
     <title>Gas Delivery</title>
     @yield('style')
 </head>
 
 <body>
+    <div class="spin-container" id="spiner">
+        <div class="sk-bounce">
+            <div class="sk-bounce-dot"></div>
+            <div class="sk-bounce-dot"></div>
+        </div>
+    </div>
     <div class="nav-layout">
         <nav class="bg-gray-900 border-gray-200 dark:bg-gray-900">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -74,12 +81,15 @@
                         <li class="relative">
                             <a href="#"
                                 class="services group py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ">บริการ</a>
-                            <div class="service-dropdown absolute hidden group-focus:block top-[30px] left-[-2px] min-w-[120px] min-h-[75px] bg-gray-600 shadow-md mt-1 rounded text-white">
+                            <div
+                                class="service-dropdown absolute hidden group-focus:block top-[30px] left-[-2px] min-w-[120px] min-h-[75px] bg-gray-600 shadow-md mt-1 rounded text-white">
                                 <ul class="w-full h-[75px] flex flex-col">
-                                    <a class="flex items-center justify-center w-full h-1/2 text-center bg-inherit hover:bg-gray-700" href="/tankchange">
+                                    <a class="flex items-center justify-center w-full h-1/2 text-center bg-inherit hover:bg-gray-700"
+                                        href="/tankchange">
                                         <li>เปลี่ยนถัง</li>
                                     </a>
-                                    <a class="flex items-center justify-center w-full h-1/2 text-center bg-inherit hover:bg-gray-700" href="/tankchange">
+                                    <a class="flex items-center justify-center w-full h-1/2 text-center bg-inherit hover:bg-gray-700"
+                                        href="/ordering">
                                         <li>สั่งสินค้า</li>
                                     </a>
                                 </ul>
@@ -113,6 +123,12 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        /* spiner */
+        window.addEventListener('load', () => {
+            var spiner = document.getElementById("spiner")
+            spiner.style.display = "none";
+        })
+
         window.csrf_token = "{{ csrf_token() }}"
         axios.defaults.headers.common = {
             'X-Requested-With': 'XMLHttpRequest',
@@ -165,6 +181,9 @@
             const phone = phone_number ? phone_number : "";
             window.location.href = `searchorder?phone=${phone}`;
         }
+
+
+
     </script>
     @yield('scripts')
 </body>

@@ -30,7 +30,7 @@
                             </figure>
                             <div class="details h-full flex">
                                 <div class="box-details flex flex-col justify-between w-[85%]">
-                                    <p class="text-gray-500">เปลี่ยนถัง</p>
+                                    <p class="text-gray-500">[{{$item->cate_id == 1 ? "เปลี่ยนถัง" : ($item->cate_id == 2 ? "ถังแก๊สใหม่" : "อุปกรณ์")}}]</p>
                                     <div class="flex justify-between">
                                         <p>{{ $item->title }}</p>
                                         <p style="font-size: 18px; color: #0170fa;">{{ $item->price }} บาท</p>

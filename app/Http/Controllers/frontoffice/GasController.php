@@ -37,11 +37,22 @@ class GasController extends Controller
 
     public function orderingContent(Request $request)
     {
-        $products = Product::where(['cate_id' => 1, 'display' => 1])->get();
+        if($request->cateid !== null) {
+            $products = Product::where(['cate_id' => $request->cateid, 'display' => 1])->get();
+            $cate_title = (int)($request->cateid) === 2 ? "ถังแก๊สใหม่" : "อุปกรณ์";
+        } else {
+            $products = DB::table('products')
+                                    ->whereIn('cate_id', [2,3])
+                                    ->where('display', 1)
+                                    ->get();
+            $cate_title = "สินค้าทั้งหมด";
+        }
+
         $orderNumber = $request->session()->get('orders_number');
         $orderItem = OrderItem::where(['orders_number' => $orderNumber])->get();
 
         return view('pages.gas.ordering', [
+            'cate_title' => $cate_title,
             'products' => $products,
             'cart_notify' => count($orderItem),
         ]);
@@ -61,10 +72,20 @@ class GasController extends Controller
             ], 404);
         }
 
+        if ($data->cate_id == 1) {
+            $cate_title = "เปลี่ยนถัง";
+        } else if ($data->cate_id == 2) {
+            $cate_title = "สั่งถังแก๊ส";
+
+        } else {
+            $cate_title = "สั่งอุปกรณ์";
+
+        }
+
 
         return view('pages.gas.product-details', [
             'data' => $data,
-
+            'cate_title' => $cate_title,
             'cart_notify' => count($orderItem),
 
         ]);
