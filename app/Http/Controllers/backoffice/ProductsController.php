@@ -16,14 +16,14 @@ class ProductsController extends BaseController
     public function getProducts(Request $req)
     {
         try {
-            $pageId = $req->input('pageId');
+            $cateId = $req->input('cateId');
             $language = $req->input('language');
-            if ($pageId) {
+            if ($cateId) {
                 $products = DB::select('SELECT * FROM (
                     SELECT * FROM products
-                    WHERE (page_id = :pageId AND language = :lang) OR (page_id = :pageIdd AND defaults = 1)
+                    WHERE (cate_id = :cateId AND language = :lang) /* OR (page_id = :cateIdd AND defaults = 1)*/
                     ORDER BY defaults ASC
-                ) as product GROUP BY id ORDER BY updated_at DESC', [':pageId' => $pageId, ':pageIdd' => $pageId, ':lang' => $language]);
+                ) as product GROUP BY id ORDER BY updated_at DESC', [':cateId' => $cateId, ':lang' => $language]);
                 return response([
                     'message' => 'ok',
                     'description' => 'get product success',
