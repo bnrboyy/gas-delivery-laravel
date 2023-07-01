@@ -93,7 +93,7 @@
                     showConfirmButton: false,
                     timer: 2000
                 }).then(() => {
-                    window.location.reload();
+                    window.location.href = "/cart";
                 })
             }).catch((err) => {
                 console.log(err)

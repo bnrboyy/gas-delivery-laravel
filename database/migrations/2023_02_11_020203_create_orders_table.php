@@ -27,6 +27,7 @@ return new class extends Migration
             $table->dateTime('transaction_date')->nullable()->comment('วันที่ทำรายการ');
             $table->dateTime('shipping_date')->nullable()->comment('วันที่รับบริการ');
             $table->integer('total_price')->default(0);
+            $table->integer('discount')->default(0)->comment('ส่วนลด');
             $table->integer('delivery_price')->default(0);
             $table->string('distance')->default(0)->comment('Km.');
             $table->dateTime('date_drop')->nullable();

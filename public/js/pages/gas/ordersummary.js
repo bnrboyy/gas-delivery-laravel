@@ -24,7 +24,6 @@ var hour = now2.getHours().toString().padStart(2, "0");
 var minute = now2.getMinutes().toString().padStart(2, "0");
 var datetime2 = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
 
-
 const total_price_product = document
     .querySelector(".total-price-product")
     .getAttribute("total-price-product");
@@ -37,7 +36,9 @@ const delivery_price = parseInt(
 const price_per_kilo = parseInt(
     document.querySelector(".web-info").getAttribute("price-per-kilo")
 );
-const orderNumber = document.querySelector(".web-info").getAttribute("orders-number");
+const orderNumber = document
+    .querySelector(".web-info")
+    .getAttribute("orders-number");
 
 let distance = 0;
 let radius = 0;
@@ -90,6 +91,17 @@ inputFile.addEventListener("change", () => {
 
 /* End upload slip */
 
+function initialData() {
+    const name = localStorage.getItem('member_name')
+    const phoneNumb = localStorage.getItem('phone_number')
+
+    memberName.value = name ? name : "";
+    phone.value = phoneNumb ? phoneNumb : "";
+
+}
+
+initialData();
+
 function confirmOrder() {
     let errorArr = [];
 
@@ -141,7 +153,8 @@ function confirmOrder() {
             return false;
         });
     } else {
-        localStorage.setItem('phone_number', orders.phone);
+        localStorage.setItem("phone_number", orders.phone);
+        localStorage.setItem("member_name", orders.member_name);
         saveOrder(orders);
     }
 }
@@ -166,7 +179,7 @@ async function saveOrder(_orders) {
     }
 
     const response = await axios.post("/order/confirmorder", formData);
-    const phone_number = localStorage.getItem("phone_number")
+    const phone_number = localStorage.getItem("phone_number");
 
     if (response.data.status) {
         Swal.fire({
@@ -190,27 +203,29 @@ async function saveOrder(_orders) {
 function onCancelOrder(_orderNumb) {
     Swal.fire({
         text: "คุณต้องการยกเลิกคำสั่งซื้อหรือไม่",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'ยืนยัน',
-        cancelButtonText: 'กลับ'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "ยืนยัน",
+        cancelButtonText: "กลับ",
     }).then((result) => {
         if (result.isConfirmed) {
-            axios.delete(`order/cancel/${_orderNumb}`)
+            axios
+                .delete(`order/cancel/${_orderNumb}`)
                 .then(() => {
                     Swal.fire({
-                        icon: 'success',
-                        title: 'ยกเลิกคำสั่งซื้อสำเร็จ',
+                        icon: "success",
+                        title: "ยกเลิกคำสั่งซื้อสำเร็จ",
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 2000,
                     }).then(() => {
                         window.location.href = "/";
-                    })
-                }).catch((err) => console.log(err))
+                    });
+                })
+                .catch((err) => console.log(err));
         }
-    })
+    });
 }
 
 function initMap() {

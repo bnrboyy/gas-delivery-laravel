@@ -243,7 +243,7 @@ class OrderController extends Controller
                 'orders_number' => $orderTemp->orders_number,
                 'time_pay' => new DateTime(),
                 'slip_image' => $slip_image,
-
+                'verified' => 1,
             ]);
 
             $request->session()->forget('orders_number');

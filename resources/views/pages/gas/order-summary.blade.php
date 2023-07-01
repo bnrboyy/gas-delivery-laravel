@@ -60,10 +60,10 @@
                                         <label for="cash">ชำระเงินปลายทาง</label>
                                     </div>
 
-                                    <div>
+                                    {{-- <div>
                                         <input type="radio" id="radio-tranfer" name="drone" value="tranfer">
                                         <label for="tranfer">โอนจ่าย</label>
-                                    </div>
+                                    </div> --}}
                                 </fieldset>
                                 <div class="w-full">
                                     <div class="upload-slip flex flex-col justify-center items-center w-full h-[150px]"
