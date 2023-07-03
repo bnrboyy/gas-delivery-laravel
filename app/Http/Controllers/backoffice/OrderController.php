@@ -444,14 +444,35 @@ class OrderController extends Controller
         }
     }
 
-    public function UpdateDiscount(Request $request) {
-        $order = Order::where(['orders_number' => $request->orders_number])->first();
-        $discount = (int)$request->discount;
+    public function UpdateDiscount(Request $request)
+    {
+        try {
+            $order = Order::where(['orders_number' => $request->orders_number])->first();
+            $discount = (int)$request->discount;
 
-        return response([
-            'message' => $order,
-            'discount' => $discount,
-            'description' => 'Discount has been updated!'
-        ], 201);
+            if (!$order) {
+                return response([
+                    'message' => 'error',
+                    'description' => 'order not found',
+                    'status' => 404
+                ]);
+            }
+
+            $order->discount = $discount;
+            $order->save();
+
+            return response([
+                'message' => $order,
+                'discount' => $discount,
+                'description' => 'Discount has been updated!'
+            ], 201);
+        } catch (Exception $e) {
+            return response([
+                'message' => 'error',
+                'description' => 'something went wrong',
+                'status' => 500,
+                'errorMessage' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

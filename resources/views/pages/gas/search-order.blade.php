@@ -108,12 +108,21 @@
                                     </div>
                                 @endforeach
                             </div>
+                            @if ($order_detail->discount !== 0)
+                                <div class="flex flex-col w-full h-[60px]">
+                                    <div class="flex gap-2 w-full items-center">
+                                        <img src="images/icons/tag.png" alt="" width="30">
+                                        <p class="text-gray-500 text-[16px]">ส่วนลดจากร้านค้า:</p>
+                                    </div>
+                                    <p class="text-[18px]">{{$order_detail->discount}} บาท</p>
+                                </div>
+                            @endif
                             <div class="flex flex-col w-full h-[60px]">
                                 <div class="flex gap-2 w-full items-center">
                                     <img src="images/icons/dollar.png" alt="" width="30">
                                     <p class="text-gray-500 text-[16px]">ราคารวม:</p>
                                 </div>
-                                <p class="text-[18px]">{{$order_detail->total_price + $order_detail->delivery_price}} บาท (ค่าส่ง {{$order_detail->delivery_price}} บาท)</p>
+                                <p class="text-[18px]">{{($order_detail->total_price + $order_detail->delivery_price) - $order_detail->discount}} บาท (ค่าส่ง {{$order_detail->delivery_price}} บาท)</p>
                             </div>
                         </div>
                     </div>
