@@ -443,4 +443,15 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
+    public function UpdateDiscount(Request $request) {
+        $order = Order::where(['orders_number' => $request->orders_number])->first();
+        $discount = (int)$request->discount;
+
+        return response([
+            'message' => $order,
+            'discount' => $discount,
+            'description' => 'Discount has been updated!'
+        ], 201);
+    }
 }

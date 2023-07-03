@@ -45,17 +45,18 @@ Route::prefix('backoffice/v1')->group(function () {
 
         /* Order */
         Route::get('order/data/pending', [OrderController::class, 'getOrderPending']);
-        Route::delete('order/{orders_number}', [OrderController::class, 'deleteOrder']);
-        Route::delete('order/delete/item/{id}/{orders_number}', [OrderController::class, 'deleteOrderItem']);
         Route::get('order/cancel/{orders_number}', [OrderController::class, 'onCancelOrder']);
         Route::get('order/data', [OrderController::class, 'getOrder']);
         Route::get('order/data/ordernum', [OrderController::class, 'getOrderByOrderNumber']);
-        Route::patch('order/status', [OrderController::class, 'updateOrderStatus']);
         Route::post('order/approve', [OrderController::class, 'approveOrder']);
+        Route::post('order/product/update/{id}', [OrderController::class, 'updateProductList']);
         Route::post('order/send', [OrderController::class, 'sendOrder']);
         Route::patch('order/payment/verified/{orders_number}', [OrderController::class, 'verifiedPayment']);
+        Route::patch('order/status', [OrderController::class, 'updateOrderStatus']);
         Route::put('order/item/verified', [OrderController::class, 'verifiedOrderWashItem']);
-        Route::post('order/product/update/{id}', [OrderController::class, 'updateProductList']);
+        Route::put('order/update/discount/{orders_number}', [OrderController::class, 'UpdateDiscount']);
+        Route::delete('order/delete/item/{id}/{orders_number}', [OrderController::class, 'deleteOrderItem']);
+        Route::delete('order/{orders_number}', [OrderController::class, 'deleteOrder']);
 
 
         /* Member */
