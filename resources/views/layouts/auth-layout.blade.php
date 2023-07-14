@@ -26,7 +26,7 @@
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="/" class="flex items-center">
                     <img src="/images/logo/gas-logo.png" class="h-10 mr-0" alt="gas-logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap text-white">GAS DELIVERY</span></a>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap text-white">JUPP GAS</span></a>
                 <div class="flex items-center md:order-2">
                     <div class="btn-cart" cart-notify="{{ $cart_notify }}">
                         <button type="button" data-dropdown-toggle="language-dropdown-menu" onclick="goToCart()"
