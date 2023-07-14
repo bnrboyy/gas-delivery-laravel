@@ -117,11 +117,11 @@ function confirmOrder() {
 
     if (!drop_address) {
         map.classList.remove("border-black");
-        map.classList.add("border-red-500");
+        map.classList.add("border-red-600");
         errorArr.push("โปรดเลือกที่อยู่ในการจัดส่ง");
     } else {
-        map.classList.remove("border-red-500");
-        map.classList.add("border-black");
+        map.classList.remove("border-red-600");
+        map.classList.add("border-blue-500");
     }
 
     if (memberName.value === "") {

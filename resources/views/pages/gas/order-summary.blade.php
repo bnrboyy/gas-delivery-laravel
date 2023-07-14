@@ -33,7 +33,7 @@
                                 <div class="flex w-full justify-between">
                                     <label for="address">*ที่อยู่:</label>
                                     <figure
-                                        class="map flex w-[30px] h-[30px] justify-center items-center bg-white rounded-full border border-black"
+                                        class="map flex w-[30px] h-[30px] justify-center items-center bg-white rounded-full border-2 border-black"
                                         style="box-shadow: -5px -5px 20px #fff, 5px 5px 10px #b4c1d5;">
                                         <a href="/map?type=drop&page=ordersummary">
                                             <img src="/images/icons/pin-location2.png" alt=""
