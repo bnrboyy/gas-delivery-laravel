@@ -32,10 +32,9 @@
                 </div>
                 <div class="details-item flex flex-col gap-2">
                     <div class="box-details w-full ">
-                        <p class="text-[18px]"><span class="text-gray-500">[{{ $cate_title }}] : </span> {{ $data->details }}</p>
+                        <p class="text-[18px]"><span class="text-gray-500">[{{ $cate_title }}] : </span> {{ $data->title }} </p>
                         <div class="w-full break-all">
-                            <p class="">{{ $data->description }}</p>
-
+                            <p class="">{{ $data->details }}</p>
                         </div>
                     </div>
                     <div class="flex w-full h-[80px]">
