@@ -201,8 +201,12 @@ class GasController extends Controller
         $orderNumber = $request->session()->get('orders_number');
         $orderItem = OrderItem::where('orders_number', $orderNumber)->get();
 
+        $infos = $this->getWebInfo('', 'th');
+        $webInfo = $this->infoSetting($infos);
+
         return view('pages.gas.aboutus', [
             'cart_notify' => count($orderItem),
+            'branch_location' => $webInfo->settings->branch_location->value,
         ]);
     }
 }
