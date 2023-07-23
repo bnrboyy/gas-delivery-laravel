@@ -23,6 +23,7 @@ Route::get('/ordersummary', [GasController::class, 'orderSummary']);
 Route::get('/searchorder', [GasController::class, 'searchOrder']);
 Route::get('/ordering', [GasController::class, 'orderingContent']);
 Route::get('/aboutus', [GasController::class, 'aboutusContent']);
+Route::get('/serviceprice', [GasController::class, 'servicePriceContent']);
 
 
 Route::post('/create/ordertemp', [OrderController::class, 'createOrderTemp']);

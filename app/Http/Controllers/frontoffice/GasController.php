@@ -209,4 +209,18 @@ class GasController extends Controller
             'branch_location' => $webInfo->settings->branch_location->value,
         ]);
     }
+
+    public function servicePriceContent(Request $request)
+    {
+        $orderNumber = $request->session()->get('orders_number');
+        $orderItem = OrderItem::where('orders_number', $orderNumber)->get();
+
+        $infos = $this->getWebInfo('', 'th');
+        $webInfo = $this->infoSetting($infos);
+
+        return view('pages.gas.service-price', [
+            'cart_notify' => count($orderItem),
+            'branch_location' => $webInfo->settings->branch_location->value,
+        ]);
+    }
 }

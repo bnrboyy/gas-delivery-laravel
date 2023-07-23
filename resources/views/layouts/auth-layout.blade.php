@@ -95,10 +95,10 @@
                                 </ul>
                             </div>
                         </li>
-                        <li>
-                            <a href="#"
+                        {{-- <li>
+                            <a href="/serviceprice"
                                 class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">ราคาค่าบริการ</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="/aboutus"
                                 class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">เกี่ยวกับเรา</a>
@@ -181,9 +181,6 @@
             const phone = phone_number ? phone_number : "";
             window.location.href = `/searchorder?phone=${phone}`;
         }
-
-
-
     </script>
     @yield('scripts')
 </body>
