@@ -190,8 +190,6 @@ class OrderController extends Controller
 
     public function onConfirmOrder(Request $request)
     {
-        // dd($request->all());
-
         $validator = Validator::make($request->all(), [
             'drop_location' => 'string|required',
             'drop_address' => 'string|required',

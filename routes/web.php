@@ -30,7 +30,7 @@ Route::post('/create/ordertemp', [OrderController::class, 'createOrderTemp']);
 Route::delete('/orderitem/delete', [OrderController::class, 'onDeleteOrderItem']);
 Route::delete('/order/cancel/{ordernumber}', [OrderController::class, 'onCancelOrder']);
 Route::get('/cart/item/updatequantity/{id}', [OrderController::class, 'updateQuantity']);
-Route::post('/order/confirmorder', [Ordercontroller::class, 'onConfirmOrder']);
+Route::post('/order/confirmorder', [OrderController::class, 'onConfirmOrder']);
 
 Route::get('/', [ContentController::class, 'getPage']);
 Route::get('/map', [MapsController::class, 'getMap']);
