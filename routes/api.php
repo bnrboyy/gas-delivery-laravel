@@ -16,6 +16,10 @@ Route::prefix('backoffice/v1')->group(function () {
     Route::post('reset-password', [AuthBackOfficeController::class, 'onResetPassword']);
 
     Route::middleware('auth:api')->group(function () {
+         /* Dashboard */
+        // Route::get('dashboard/order', [OrderController::class, 'getOrderDash']);
+        Route::get('dashboard/order/completed', [OrderController::class, 'getOrderCompleted']);
+
         Route::post('account/settings', [AuthBackOfficeController::class, 'getAccountSettings']);
         Route::post('account/token/invoke/current', [AuthBackOfficeController::class, 'revokeCurrentToken']);
         Route::post('account/token/invoke/token_id', [AuthBackOfficeController::class, 'revokeTokenByID']);

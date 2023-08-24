@@ -475,4 +475,14 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
+    public function getOrderCompleted(Request $request)
+    {
+        $order = Order::whereIn('status_id', [4, 5])->orderBy('transaction_date', 'DESC')->get();
+        return response([
+            'massage' => "ok",
+            'status' => true,
+            'data' => $order
+        ], 200);
+    }
 }
